@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smhrd.mapper.ProductMapper">
+	
+	<!-- 상품 목록 조회(최신순)--> 
+	<select id="ProductList" resultType="com.smhrd.entity.Product">
+		SELECT * FROM tb_product
+	</select>	
+	
+	<!-- 상품 등록 -->
+	<insert id="ProductInsert" parameterType="com.smhrd.entity.Product"><!-- 판매완료날짜 뺌 -->
+		INSERT INTO tb_product (prod_name, prod_desc, prod_price, seller_id,  prod_img_path) 
+		VALUES ( #{prod_name} , #{prod_desc}, #{prod_price}, '로그인한회원id', #{prod_img_path})
+	</insert>
+	
+	
+	<!-- 상품 상세보기 -->
+	<select id="ProductContent" parameterType="int" resultType="com.smhrd.entity.Product">
+		SELECT * FROM tb_product WHERE prod_idx = #{prod_idx}
+	</select>
+	
+	<!-- 상품 조회수 올리기 -->
+	<update id="ProductCount" parameterType="int">
+		UPDATE tb_product SET prod_views = prod_views+1 WHERE prod_idx = #{prod_idx}	
+	</update>
+	
+	
+	
+	
+	<!-- SAMPLE -->
+	<select id="boardList" resultType="com.smhrd.entity.Board">
+		SELECT * FROM BOARD ORDER BY INDATE
+	</select>	
+	
+	<select id="boardContent" parameterType="int" resultType="com.smhrd.entity.Board">
+		SELECT * FROM BOARD WHERE IDX = #{idx}
+	</select>
+	
+	<insert id="boardInsert" parameterType="com.smhrd.entity.Board">
+		INSERT INTO BOARD(TITLE, CONTENT, WRITER, IMGPATH) VALUES(#{title}, #{content}, #{writer}, #{imgpath})
+	</insert>
+	
+	
+	  
+	<!-- 쌤풀이 -->
+	<delete id="boardDelete" parameterType="int">
+		DELETE FROM BOARD WHERE IDX = #{idx}
+	</delete>
+	
+	
+	
+	<!--  쌤풀이(240313) -->
+	<update id="boardUpdate" parameterType="com.smhrd.entity.Board">
+		UPDATE BOARD SET TITLE=#{title}, CONTENT=#{content} 
+		WHERE IDX = #{idx}
+	</update>
+	
+	 <!-- 쌤풀이 - 조회수(240313) -->
+	 <update id="boardCount" parameterType="int">
+	 		UPDATE BOARD SET COUNT = COUNT+1 WHERE IDX = #{idx}	
+	 </update>
+	 
+	 <!-- 댓글작성 -->
+	 <insert id="replyInsert" parameterType="com.smhrd.entity.Reply">
+	 	INSERT INTO REPLY(BOARDNUM, WRITER, CONTENT) 
+	 	VALUES (#{boardnum}, #{writer}, #{content})
+	 </insert>
+	 
+	 
+	 <!-- 댓글 보기 -->
+	 <select id="replyList" parameterType="int" resultType="com.smhrd.entity.Reply">
+	 	SELECT * FROM REPLY WHERE BOARDNUM = #{idx} ORDER BY INDATE DESC
+	 </select>
+	 
+	 
+	 <insert id ="join" parameterType="com.smhrd.entity.Member">
+	 	INSERT INTO MEMBER VALUES(#{id}, #{pw}, #{nick})
+	 </insert>
+	 
+	 <select id="login" parameterType="com.smhrd.entity.Member" resultType="com.smhrd.entity.Member">
+	 	SELECT * FROM MEMBER WHERE ID=#{id}
+	 </select>
+	 
+</mapper>
