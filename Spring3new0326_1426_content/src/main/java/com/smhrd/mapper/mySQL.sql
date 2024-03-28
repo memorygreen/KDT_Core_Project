@@ -47,9 +47,9 @@ INSERT INTO tb_product (prod_name, prod_desc, prod_price, seller_id, prod_sold_d
 SELECT * FROM tb_product;
 
 
--- 상품 임시데이터 생성
+-- 상품 임시데이터 생성(jyk)
 INSERT INTO tb_product (prod_name, prod_desc, prod_price, seller_id, prod_sold_dt, prod_img_path) 
-		VALUES ('테스트용제품명2222' ,'테스트용 제품설명 입니다2222.', 222222, 'test2', '2024-03-27', '임시경로222')
+		VALUES ('테스트용제품명2222' ,'테스트용 제품설명 입니다2222.', 222222, 'jyk', NOW()+1, '임시경로222')
 
 
 -- 상품 임시데이터 생성

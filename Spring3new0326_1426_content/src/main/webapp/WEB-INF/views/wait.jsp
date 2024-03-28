@@ -8,5 +8,6 @@
 </head>
 <body>
 	기다리세요
+	<a href="ProductList.do">메인화면으로 이동</a>
 </body>
 </html>
