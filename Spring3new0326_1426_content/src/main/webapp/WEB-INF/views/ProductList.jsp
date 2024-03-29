@@ -16,7 +16,18 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	
-	
+	<!-- 영표쌤이 추가해주심(240329 10:55 팀별 피드백) -->
+	<style>
+		  	@font-face {
+		    font-family: 'Pretendard-Regular';
+		    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+		    font-weight: 400;
+		    font-style: normal;
+		}
+		
+		*{
+		font-family: 'Pretendard-Regular';}
+	</style>
 	
 	<!-- index.html에서 그대로 가져옴  -->
 	<!-- Google Font -->
@@ -57,6 +68,8 @@
         </div>
         <div class="humberger__menu__cart">
             <p>${info.user_id}님 환영합니다</p>
+            <!-- <h1>${sessionScope.info.user_id} 세션으로 테스트</h1> -->
+            
             <!-- 반응형 메뉴 바 내 위젯 주석처리
             <ul>
                 <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
@@ -85,20 +98,37 @@
         <!-- 반응형 웹 창 축소 시 활성화되는 메뉴-->
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
-                <li><a href="goLogin.do"> 
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16">
-                        <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2m3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2M5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1"/>
-                    </svg> 로그인 <!--로그인 중이면 로그아웃으로 변하게 하는 기능 필요-->
-                    </a>
+                <li>
+                <!-- 로그인상태면 로그아웃이 보이게하고, 로그아웃상태면 로그인이 보이게 하기 -->
+                <c:choose>
+					<c:when test="${not empty sessionScope.info}">
+						<a href="logout.do"> 
+		                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16">
+		                        <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2m3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2M5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1"/>
+		                    </svg> 로그아웃 <!--로그인 중이면 로그아웃으로 변하게 하는 기능 필요-->
+	                    </a>
+					</c:when>
+					<c:otherwise>
+						<a href="goLogin.do"> 
+		                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-unlock" viewBox="0 0 16 16">
+							   <path d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2M3 8a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1z"/>
+							</svg> 로그인 <!--로그인 중이면 로그아웃으로 변하게 하는 기능 필요-->
+	                    </a>
+					</c:otherwise>
+				</c:choose>
                 </li>
 
-                <li><a href="#">  <!-- 마이페이지로 이동하게 변경 필요 -->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-person" viewBox="0 0 16 16">
-                        <path d="M11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                        <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2v9.255S12 12 8 12s-5 1.755-5 1.755V2a1 1 0 0 1 1-1h5.5z"/>
-                    </svg>
-                    마이페이지
-                    </a>
+                <li>
+                
+                    <c:if test="${not empty sessionScope.info}">
+	                	<a href="myPage.do">  <!-- 마이페이지로 이동하게 변경 필요 -->
+	                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-person" viewBox="0 0 16 16">
+	                        <path d="M11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+	                        <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2v9.255S12 12 8 12s-5 1.755-5 1.755V2a1 1 0 0 1 1-1h5.5z"/>
+	                    </svg>
+	                    마이페이지
+	                    </a>
+					</c:if>
                 </li>
                                
                 <li><a href="#">
@@ -183,33 +213,45 @@
                                 </a>
                             </div>
                             
+                            <!-- 로그인 했을 때에만 마이페이지 보이게 하기  -->
+                            <c:if test="${not empty sessionScope.info}">
+	                            <div class="header__top__right__language">
+	                            	<!-- 마이페이지 -->
+	                            	<!-- 로그인 전이면 안 보이게 하는 조건문 추가 필요 -->
+		                            <a href="myPage.do"> 
+		                            		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+		 										<path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z"/>
+		  										<path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z"/>
+											</svg> 마이페이지
+									</a>
+									
+	                                <!--언어선택 리스트 주석처리
+	                                <img src="img/language.png" alt="">
+	                                <div>English</div>
+	                                <span class="arrow_carrot-down"></span>
+	                                  
+	                                <ul>
+	                                    <li><a href="#">Spanis</a></li>
+	                                    <li><a href="#">English</a></li>
+	                                </ul>-->
+	                                
+	                            </div>
                             
-                            <div class="header__top__right__language">
-                            	<!-- 마이페이지 -->
-                            	<!-- 로그인 전이면 안 보이게 하는 조건문 추가 필요 -->
-	                            <a href="#"> 
-	                            		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
-	 										<path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z"/>
-	  										<path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z"/>
-										</svg> 마이페이지
-								</a>
-                                <!--언어선택 리스트 주석처리
-                                <img src="img/language.png" alt="">
-                                <div>English</div>
-                                <span class="arrow_carrot-down"></span>
-                                  
-                                <ul>
-                                    <li><a href="#">Spanis</a></li>
-                                    <li><a href="#">English</a></li>
-                                </ul>-->
-                            </div>
-                            
-                            <!-- 로그인 -->
-                            <!-- 로그인 상태면 로그아웃으로 보이게 하는 조건문 추가 필요 -->
-                            <div class="header__top__right__auth">
-                                <a href="goLogin.do"><i class="fa fa-user"></i>로그인</a>
-                            </div>
-                            
+                            </c:if>
+                            <!-- 로그인 상태면 로그아웃으로 보이게, 로그아웃상태면 로그인으로 보이게 -->
+                            <c:choose>
+								<c:when test="${not empty sessionScope.info}">
+									<div class="header__top__right__auth">
+                                		<a href="logout.do"><i class="fa fa-user"></i>로그아웃</a>
+                          		  	</div>
+								</c:when>
+								<c:otherwise>
+									<div class="header__top__right__auth">
+                                		<a href="goLogin.do">
+                                		<i class="fa fa-user"></i>로그인</a>
+                          		  	</div>
+								</c:otherwise>
+							</c:choose>
                             
                             
                             
@@ -415,9 +457,15 @@
                         </br>
                         </br>
                         </br>
-                        <form action = "ProductForm.do">
-                    		<button type="submit" class="btn btn-danger">상품등록 버튼(임시)</button>
-                        </form>
+                        
+                        <!-- 로그인한 회원에게만 상품등록 버튼이 보이게 하기 -->
+                        <c:if test="${not empty sessionScope.info}">
+	                        <form action = "ProductForm.do">
+	                    		<button type="submit" class="btn" style="background-color: #44bd32; color: white; font-weight: bold;">상품등록 버튼(임시)</button>
+	                        </form>
+						</c:if>
+						
+						
 						</br>
                         
                     </div>
@@ -463,7 +511,7 @@
                     	<!-- 이미지 및 아이콘 나오는 부분 div -->
                     	<!-- <img src="resources/board/${prod.prod_img_path}" width=50 height=100> --><!-- 원래경로 -->
                         <!-- <div class="featured__item__pic set-bg" data-setbg="resources/img/featured/feature-1.jpg"> -->
-                        <div class="featured__item__pic set-bg" data-setbg="resources/board/${prod.prod_img_path}">
+                        <div class="featured__item__pic set-bg" data-setbg="resources/img/saveimg/${prod.prod_img_path}">
                         	<c:if test="${not empty prod.prod_img_path}">
 							
 							</c:if></td>
@@ -479,14 +527,23 @@
                         
                         <!-- 상품 사진 아래 정보 나오는 부분 div -->
                         <div class="featured__item__text">
+	                        <h6 style="font-weight: bold; display: inline-block; padding: 5px 10px; 
+								    background-color: ${prod.prod_status == '거래완료' ? '#FF3F34' : '#44bd32'}; 
+								    color: white; border: none; border-radius: 5px; cursor: pointer; pointer-events: none;">
+								    ${prod.prod_status}
+								</h6> <!-- 상품 판매 상태(거래완료일 때에는 빨간색으로 표시 (삼항연산자 사용) -->
                             <h6><a href="ProductContent.do?prod_idx=${prod.prod_idx}">${prod.prod_name}</a></h6>
                             <h5>${prod.prod_price}원</h5>
-                            <h6>학교명1</h6> <!-- session에 있는 값 가져와야하나? -->
-                            <span>${fn:split(prod.created_at, " ")[0]}</span>
+                            <span style="font-size: 15px;">학교명</span> <!-- session에 있는 값 가져와야하나? -->
                             </br>
-                            <span>조회수 ${prod.prod_views} </span>
+                            <span style="font-size: 13px;">${fn:split(prod.created_at, " ")[0]}</span> <!-- 상품 게시 일자 -->
                             </br>
-                            <span>${prod.prod_status}</span>
+                            <span style="font-size: 13px;">조회수 ${prod.prod_views}</span>
+                            </br>
+                            
+                            
+                            
+                            
                         </div>
                     </div>
                 </div>

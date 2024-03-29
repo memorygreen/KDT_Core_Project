@@ -31,22 +31,21 @@ public interface ProductMapper {
 	public void productStatusChange(int prod_idx);
 
 	
-	
+	// 댓글 작성
+	public void replyInsert(Reply reply);
+
+	public List<Reply> replyList(int pord_idx);
+
 	
 	
 	/***********************************************/
 	
-	// 댓글 작성
-	public void replyInsert(Reply vo);
-
-	public List<Reply> replyList(int idx);
-
+	
 	public void join(Member vo);
 
 	public Member login(Member vo);
 	
-	
-	
+		
 	
 
 

@@ -22,6 +22,7 @@ import org.springframework.web.context.support.ServletContextScope;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import com.smhrd.entity.Member;
 import com.smhrd.entity.Product;
 import com.smhrd.entity.Reply;
 import com.smhrd.mapper.ProductMapper;
@@ -65,15 +66,21 @@ public class ProductController {
 	
 	
 	@RequestMapping("/ProductInsert.do")
-	public String ProductInsert(HttpServletRequest request) {
+	public String ProductInsert(HttpServletRequest request, HttpSession session) {
 	    
 			System.out.println("게시글 입력 기능");
+			
+			Member loginUser = (Member) session.getAttribute("info");//로그인한 회원의 정보를 세션에서 가져와서 loginUser라는 변수에 넣기
+			if(loginUser == null) { //만약 로그인한 회원 정보가 없다면?(로그인x상태라면) 로그인페이지로 리다이렉트
+				return "redirect:/login.do"; 
+			}
+			
 			
 			//파일을 서버 폴더에 저장하는 객체	
 			MultipartRequest multi = null;
 			
 			int fileMaxSize = 10 * 1024 * 10000; //파일크기
-			String savePath = request.getRealPath("resources/board"); //저장경로
+			String savePath = request.getRealPath("/resources/img/saveimg"); //저장경로
 			System.out.println(savePath);
 			
 			try {
@@ -90,14 +97,17 @@ public class ProductController {
 			String prod_price = multi.getParameter("prod_price");
 			int prod_price_num = Integer.parseInt(prod_price);
 			
+			
+			String seller_id = loginUser.getUser_id(); // seller_id에 로그인한 회원(loginUser)의 아이디 넣기
+			
+			//product(DTO) 객체 생성
 			Product prod = new Product();
 
 			prod.setProd_name(prod_name);
 			prod.setProd_desc(prod_desc);
 			prod.setProd_img_path(prod_img_path);
 			prod.setProd_price(prod_price_num); //자영(0325):가격은 정수니까 문자열->정수 형변환 
-			
-			//vo.setWriter(writer);
+			prod.setSeller_id(seller_id); // 로그인한 회원(loginUser)의 id를 product(DTO)의seller_id에 넣기
 			
 			System.out.println(prod.toString());//test용
 			
@@ -118,9 +128,14 @@ public class ProductController {
 		
 		//prod변수에 해당 상품번호의 정보를 담기(상품1개 정보)
 		Product prod = mapper.ProductContent(prod_idx);
-		
 		// model에 상품1개의 정보 담기
 		model.addAttribute("prod", prod); //상품1개 상세보기
+		
+		// 해당 게시글의 댓글들(list) 가져오기
+		List<Reply> reply_list = mapper.replyList(prod_idx);
+		model.addAttribute("reply_list", reply_list); //모델에 해당상품식별자(prod_idx)에 대한 댓글들 목록 저장
+		
+		
 		
 		//ProductContent jsp(상품 상세보기 화면)로 보내주기
 		return "ProductContent";
@@ -138,7 +153,37 @@ public class ProductController {
 	}
 	
 	
+	//댓글작성(spring3에서 가져오기)
+		@RequestMapping("/replyInsert.do")
+		public String replyInsert(@RequestParam("prod_idx") int prod_idx,
+								  @RequestParam("reply_content") String reply_content, 
+								  HttpSession session, Reply reply) {
+			System.out.println("댓글 작성 기능");
+			
+			
+			// 세션에서 현재 로그인한 사용자 정보 가져오기
+			Member loginUser = (Member) session.getAttribute("info");//로그인한 회원의 정보를 세션에서 가져와서 loginUser라는 변수에 넣기
+			String reply_writer_id = loginUser.getUser_id(); //reply_writer_id에 로그인한 회원(loginUser)의 아이디 넣기
+			
+	        
+	        reply.setProd_idx(prod_idx); //상품번호(식별자) 넣기
+	        reply.setReply_content(reply_content); //댓글 내용 넣기
+	        reply.setReply_writer_id(reply_writer_id); //reply dto의 reply_writer_id 에 로그인한 회원(loginUser)의 아이디(info.user_id) 넣기
+	        
+	        
+			mapper.replyInsert(reply); //mapper에 댓글 넣는 기능 요청
+			
+			return "redirect:/ProductContent.do?prod_idx="+reply.getProd_idx();//댓글작성 완료 후 해당 상품번호의 상세보기 화면으로 이동 
 
+		}
+		
+//		@RequestMapping("/replyInsert.do")
+//		public String replyInsert(Reply vo) {
+//			System.out.println("댓글 작성 기능");
+//			mapper.replyInsert(vo);
+//			return "redirect:/boardContent.do#view?idx="+vo.getBoardnum(); //자:댓글보고 상세보기 화면 으로 가야함 
+//
+//		}
 	
 	
 	

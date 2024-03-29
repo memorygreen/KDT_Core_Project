@@ -102,9 +102,25 @@ public class MemberController {
 			session.setAttribute("info", info);
 			
 			System.out.println("로그인성공");
+			return "redirect:/ProductList.do";
+			
+		}else {
+			System.out.println("로그인 실패");
+			return "redirect:/login.do";
 			
 		}
-		return "wait";
 	}
+		
+		//로그아웃 기능 
+		@RequestMapping("/logout.do")
+		public String logout(HttpSession session) {
+			System.out.println("로그아웃 성공 ");
+			session.invalidate(); //세션 종료하여 로그아웃
+		    return "redirect:/ProductList.do"; // 메인화면으로 이동
+		}
+	
+		
+		
+		
 }
 

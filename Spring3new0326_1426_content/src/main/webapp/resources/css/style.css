@@ -1708,9 +1708,10 @@ ol {
 	margin-left: 4px;
 }
 
+/*가격 글자색 추천:#FF3F34*/
 .product__details__text .product__details__price {
 	font-size: 30px;
-	color: #dd2222;
+	color: #FF3F34;
 	font-weight: 600;
 	margin-bottom: 15px;
 }

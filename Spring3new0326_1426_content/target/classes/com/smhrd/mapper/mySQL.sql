@@ -31,6 +31,18 @@ PRIMARY KEY (prod_idx)
 );
 
 
+DROP TABLE tb_reply;
+--tb_reply 테이블 생성
+CREATE TABLE tb_reply(
+	reply_idx INT UNSIGNED   AUTO_INCREMENT  PRIMARY KEY, 
+	reply_content VARCHAR(500) NOT NULL, 
+	replied_at TIMESTAMP NOT NULL DEFAULT NOW(),
+	prod_idx INT NOT NULL, 
+	reply_writer_id VARCHAR(30) NOT NULL
+);
+
+SELECT * FROM tb_reply; 
+
 DROP TABLE tb_product;
 
 COMMIT;

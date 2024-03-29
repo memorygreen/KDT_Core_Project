@@ -10,7 +10,7 @@
 	<!-- 상품 등록 -->
 	<insert id="ProductInsert" parameterType="com.smhrd.entity.Product"><!-- 판매완료날짜 뺌 -->
 		INSERT INTO tb_product (prod_name, prod_desc, prod_price, seller_id,  prod_img_path) 
-		VALUES ( #{prod_name} , #{prod_desc}, #{prod_price}, '로그인한회원id', #{prod_img_path})
+		VALUES ( #{prod_name} , #{prod_desc}, #{prod_price}, #{seller_id}, #{prod_img_path})
 	</insert>
 	
 	
@@ -29,6 +29,26 @@
 	<update id="productStatusChange" parameterType="int">
 		UPDATE tb_product SET prod_status = '거래완료' WHERE prod_idx = #{prod_idx}	
 	</update>
+	
+	
+	<!-- 댓글작성 -->
+	<insert id="replyInsert" parameterType="com.smhrd.entity.Reply">
+	 	INSERT INTO tb_reply(prod_idx, reply_writer_id, reply_content) 
+	 	VALUES (#{prod_idx}, #{reply_writer_id}, #{reply_content})
+	</insert>
+	 
+	 
+	 <!-- 댓글 보기 -->
+	 <select id="replyList" parameterType="int" resultType="com.smhrd.entity.Reply">
+	 	SELECT * FROM tb_reply WHERE prod_idx = #{prod_idx} ORDER BY replied_at
+	 </select>
+	
+	
+	
+	
+	
+	
+	
 	
 	 
 </mapper>
