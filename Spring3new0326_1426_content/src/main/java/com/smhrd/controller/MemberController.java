@@ -111,7 +111,7 @@ public class MemberController {
 		}
 	}
 		
-		//로그아웃 기능 
+		//자영 : 로그아웃 기능 (2024.03.29)
 		@RequestMapping("/logout.do")
 		public String logout(HttpSession session) {
 			System.out.println("로그아웃 성공 ");
@@ -119,6 +119,13 @@ public class MemberController {
 		    return "redirect:/ProductList.do"; // 메인화면으로 이동
 		}
 	
+		//자영 : 마이페이지로 이동 (2024.03.29)
+		@RequestMapping("/myPage.do")
+		public String myPage() {
+			System.out.println("MemberController에서 마이페이지 화면 이동");
+			return "myPage";
+		}
+		
 		
 		
 		

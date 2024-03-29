@@ -44,6 +44,9 @@ public interface ProductMapper {
 	public void join(Member vo);
 
 	public Member login(Member vo);
+
+
+	public List<Product> myProductList(String seller_id);
 	
 		
 	

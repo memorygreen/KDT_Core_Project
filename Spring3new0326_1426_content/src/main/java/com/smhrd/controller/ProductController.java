@@ -177,13 +177,39 @@ public class ProductController {
 
 		}
 		
-//		@RequestMapping("/replyInsert.do")
-//		public String replyInsert(Reply vo) {
-//			System.out.println("댓글 작성 기능");
-//			mapper.replyInsert(vo);
-//			return "redirect:/boardContent.do#view?idx="+vo.getBoardnum(); //자:댓글보고 상세보기 화면 으로 가야함 
-//
-//		}
+		
+		
+		
+		
+		
+		
+	// 내 상품 게시글 목록 모아보기
+		@RequestMapping("/goMyProductList.do")
+		public String goMyProductList(Model model ,HttpSession session, @RequestParam("user_id") String user_id) {
+			System.out.println("내 게시글 목록으로 이동");
+			
+			return "redirect:/myProductList.do?user_id="+user_id; //goMyProductList.do로 이동돼서 리다이렉트해봄
+		}
+		
+		
+		@RequestMapping("/myProductList.do")
+		public List<Product> myProductList(Model model ,HttpSession session, @RequestParam("user_id") String user_id) {
+			System.out.println("내 게시글 목록으로 이동");
+
+			// 세션에서 현재 로그인한 사용자 정보 가져오기
+			Member loginUser = (Member) session.getAttribute("info");//로그인한 회원의 정보를 세션에서 가져와서 loginUser라는 변수에 넣기
+			String seller_id = loginUser.getUser_id(); //reply_writer_id에 로그인한 회원(loginUser)의 아이디 넣기
+			System.out.println(seller_id);
+			// 로그인한 회원의 id를 seller_id에 넣어서 mapper한테 select 함수 요청하기 
+			List<Product> my_prod_list = mapper.myProductList(seller_id);
+			System.out.println(my_prod_list.size());
+			model.addAttribute("my_prod_list", my_prod_list); //request
+			
+			return my_prod_list; //리스트 전달
+		}
+		
+		
+		
 	
 	
 	

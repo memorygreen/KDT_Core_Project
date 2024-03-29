@@ -695,12 +695,12 @@
 	
 	
 	
-	
+	<!-- 순위별 보기 3개 시작-->
     <!-- Latest Product Section Begin -->
-    <!-- <section class="latest-product spad">
+    <section class="latest-product spad">
         <div class="container">
             
-            <!--  조회순 보기
+            <!--  조회순 보기-->
             <div class="row">
                 <div class="col-lg-4 col-md-6">
                     <div class="latest-product__text">
@@ -766,10 +766,9 @@
                             </div>
                         </div>
                     </div>
-                </div> 조회순 보기 끝-->
+                </div> <!--  조회순 보기 끝-->               
                 
-                
-                <!--  최저가순 보기
+                <!--  최저가순 보기-->
                 <div class="col-lg-4 col-md-6">
                     <div class="latest-product__text">
                         <h4>최저가순</h4>
@@ -836,12 +835,12 @@
                             </div>
                         </div>
                     </div>
-                </div>    최저가순 보기 끝 -->
+                </div>   <!-- 최저가순 보기 끝 -->
                 
-                <!--  가까운 학교순 보기
+                <!--  가까운 학교순 보기-->
                 <div class="col-lg-4 col-md-6">
                     <div class="latest-product__text">
-                        <h4>가까운 학교순</h4>
+                        <h4>댓글 많은 순 </h4>
                         <div class="latest-product__slider owl-carousel">
                             <div class="latest-prdouct__slider__item">
                                 <a href="#" class="latest-product__item">
@@ -903,12 +902,12 @@
                             </div>
                         </div>
                     </div>
-                </div> 가까운 학교순 보기 끝 
+                </div> <!-- 가까운 학교순 보기 끝 --> 
             </div>
         </div>
-    </section>-->
+    </section>
     <!-- Latest Product Section End -->
-    
+    <!-- 순위별 보기 3개 끝 -->
     
 
     <!-- Blog Section Begin -->
@@ -1079,75 +1078,7 @@
     <script src="/controller/resources/js/mixitup.min.js"></script>
     <script src="/controller/resources/js/owl.carousel.min.js"></script>
     <script src="/controller/resources/js/main.js"></script>
-    
-    
-    
-    
-    
-    
-<!-- --------------실습시간에 만들었던 상품목록 메인화면 ------------------------- -->
-	<!--  
-	<div class="container">
-		<h2>ProductList.jsp</h2>
-		
-		<div class="panel panel-default">
-			<div class="panel-heading">ProductList</div>
-			<div class="panel-body">
 
-				<table class="table table-hover">
-					<thead>
-						<tr class="warning">
-							<th>번호</th>
-							<th>상품이미지 미리보기</th>
-							<th>제목</th>
-							<th>작성자</th>
-							<th>작성일</th>
-							<th>조회수</th>
-							<th>신고수</th>
-							<th>거래상태</th>
-							
-						</tr>
-					</thead>
-					<tbody>
-						
-							<c:forEach items="${prod_list}" var="prod" varStatus="i">
-								
-								<tr>
-									<td>${prod.prod_idx}</td>
-									<td>
-										<c:if test="${not empty prod.prod_img_path}">
-		    							<img src="resources/board/${prod.prod_img_path}" width=50 height=100>
-		    							<br>
-		    							</c:if>
-									</td>
-									<td><a href="ProductContent.do?prod_idx=${prod.prod_idx}">${prod.prod_name}</a></td>
-									<td>${prod.seller_id}</td>
-									<td>${prod.created_at}</td>
-									<td>${prod.prod_views}</td>
-									<td>${prod.prod_rpt_cnt}</td>
-									<td>${prod.prod_status}</td>
-								</tr>
-								
-							</c:forEach>
-						
-
-					</tbody>
-				</table>
-
-				
-				
-				
-	
-
-
-
-			</div>
-
-
-
-			<div class="panel-footer" class="btn btn-warning">ProductList.jsp</div>
-		</div>
-	</div>-->
 
 </body>
 </html>

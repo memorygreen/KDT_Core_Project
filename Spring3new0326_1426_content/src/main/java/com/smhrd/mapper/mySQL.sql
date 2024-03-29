@@ -43,6 +43,9 @@ CREATE TABLE tb_reply(
 
 SELECT * FROM tb_reply; 
 
+SELECT * FROM tb_product; 
+
+
 DROP TABLE tb_product;
 
 COMMIT;

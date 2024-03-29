@@ -43,7 +43,12 @@
 	 	SELECT * FROM tb_reply WHERE prod_idx = #{prod_idx} ORDER BY replied_at
 	 </select>
 	
-	
+	<!-- 내 상품 목록 조회 -->
+	<!-- 상품 목록 조회(최신순)--> 
+	<select id="myProductList"  parameterType="String" resultType="com.smhrd.entity.Product">
+		SELECT * FROM tb_product
+		WHERE seller_id = #{seller_id}
+	</select>
 	
 	
 	

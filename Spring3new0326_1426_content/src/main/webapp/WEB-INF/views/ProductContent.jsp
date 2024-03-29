@@ -637,10 +637,6 @@
 							<!-- db에서 가져온 댓글 내용 끝 -->
 
 
-
-
-
-
 							<!-- 댓글기능(240313) -->
 
 							<form action="replyInsert.do" method="post">
