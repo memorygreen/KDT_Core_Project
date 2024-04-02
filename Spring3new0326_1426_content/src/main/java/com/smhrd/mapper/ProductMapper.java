@@ -50,7 +50,14 @@ public interface ProductMapper {
 	// 상품목록 댓글 많은 순 보기
 	public List<Product> ProductReplyList();
 	
+	// 게시글 전체목록 조회
+	public List<Product> Postmanagement();
 		
+	// 게시글 수정 페이지
+	public Product ModifyingPosts(int prod_idx);
+
+	// 게시글 삭제
+	public void Delete(int prod_idx);	
 	
 
 

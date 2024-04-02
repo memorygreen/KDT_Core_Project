@@ -1,5 +1,7 @@
 package com.smhrd.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
@@ -16,7 +18,15 @@ public interface MemberMapper {
 
 	public void UpdateSchoolInfo(Member vo);
 
+	public List<Member> AdministratorList();
 
+	public List<Member> UserInformation();
+
+	public Member UserContent(String user_id);
+
+	public void userInfoChange(Member vo);
+
+	public Member PostContent(String user_id);
 
 	
 
