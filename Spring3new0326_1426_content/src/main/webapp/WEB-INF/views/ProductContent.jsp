@@ -565,20 +565,10 @@
 								<div class="product__details__tab__desc">
 									<h6>댓글</h6>
 
-
-
-									
-
 									<!-- db에서 가져온 댓글 내용 -->
-
-
 									<!-- 댓글 내용 반복해서 가져오기  -->
 									<c:forEach items="${reply_list}" var="reply">
-
-
 										<!-- 조건 -->
-
-
 										<!-- 로그인한 회원과 댓글작성자 일치하면 작성자에 (나) 라고 표시하기 -->
 										<c:choose>
 											<c:when
@@ -592,10 +582,7 @@
 												    </div>
 												</div>
 
-
-
-												</div>
-								
+												
 											</c:when>
 			
 											<c:when test="${prod.seller_id==reply.reply_writer_id}">
@@ -630,6 +617,7 @@
 											</c:otherwise>
 										</c:choose>
 									</c:forEach>
+								</div>
 							</div>
 							<!-- 말풍선 넣는 공간 끝-->
 
@@ -646,20 +634,20 @@
 								<table style="width: 100%">
 
 									<tr id="view">
-										<td style="padding: 5px" width="150px">작성자</td>
-										<td style="padding: 5px" colspan="2">댓글내용</td>
-										<td style="padding: 5px"></td>
+										<td style="padding: 5px" width="10%">작성자</td>
+										<td style="padding: 5px" width="89%">댓글내용</td>
+										<td style="padding: 5px" width="1%"></td>
 									</tr>
 									<!--  댓글 작성하는 곳 -->
 									<tr>
-										<td style="padding: 5px" width="150px">
+										<td style="padding: 5px"  width="10%">
 											<!-- 댓글작성자 id(로그인한 회원id) --> <input type="text"
 											name="user_id" class="form-control"
 											value="${sessionScope.info.user_id}" readonly>
 
 										</td>
 
-										<td style="padding: 5px">
+										<td style="padding: 5px" width="89%">
 											<!-- 댓글 내용 --> <!-- 댓글내용 작성 부분 --> <!-- 로그인 한 회원만 댓글 작성 가능하도록  -->
 											<c:choose>
 												<c:when test="${not empty sessionScope.info.user_id}">
@@ -676,7 +664,7 @@
 										</td>
 
 
-										<td style="padding: 5px">
+										<td style="padding: 5px" width="1%">
 											<button type="submit" class="btn" style="background-color: #44bd32; color: white; font-weight: bold;">댓글작성</button>
 											
 										</td>
