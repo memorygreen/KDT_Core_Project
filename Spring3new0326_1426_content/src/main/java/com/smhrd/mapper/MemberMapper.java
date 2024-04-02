@@ -14,6 +14,8 @@ public interface MemberMapper {
 
 	public Member login(Member vo);
 
+	public void memberOut(String user_id);
+
 	
 
 

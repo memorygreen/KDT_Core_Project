@@ -33,20 +33,22 @@ public interface ProductMapper {
 	
 	// 댓글 작성
 	public void replyInsert(Reply reply);
-
+	
+	// 댓글 목록 조횐
 	public List<Reply> replyList(int pord_idx);
 
-	
-	
-	/***********************************************/
-	
-	
-	public void join(Member vo);
 
-	public Member login(Member vo);
-
-
+	// 내가 쓴 글만 모아 보기
 	public List<Product> myProductList(String seller_id);
+
+	// 상품목록 조회순 내림차순 보기
+	public List<Product> ProductViewsList();
+	
+	// 상품목록 최저가순 보기
+	public List<Product> ProductLowestPriceList();
+	
+	// 상품목록 댓글 많은 순 보기
+	public List<Product> ProductReplyList();
 	
 		
 	

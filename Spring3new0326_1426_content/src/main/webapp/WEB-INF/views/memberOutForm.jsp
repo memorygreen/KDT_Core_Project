@@ -84,20 +84,16 @@
 
 
 <!-- /*////////*/*/*/*/ /*////////*/*/*임시로 만든 화면/*/ /*////////*/*/*/*/ /*////////*/*/*/*/ /*////////*/*/*/*/ -->
-	<div><h1>마이페이지</h1></div>
+	<div><h1>회원 탈퇴 창</h1></div>
 
-	<!-- 로그인한 회원의 id에 해당하는 내상품목록 화면으로 이동  -->
-    <form action = "goMyProductList.do" method="post"> <!-- 자영 : post방식으로 가도 괜찮은걸까? -->
-    	<input type="hidden" name="user_id" value="${sessionScope.info.user_id}">
-		<button type="submit" class="btn" style="background-color: #44bd32; color: white; font-weight: bold;">내 상품 보기(임시)</button>
-    </form>
-
-	<form action = "goMemberOutForm.do" method="post"> 
-    	<input type="hidden" name="user_id" value="${sessionScope.info.user_id}">
-		<button type="submit" class="btn" style="background-color: #44bd32; color: white; font-weight: bold;">회원 탈퇴</button>
-    </form>
+	<h1>회원 탈퇴를 하시겠습니까?</h1>
+	<a href="memberOut.do" class="btn btn-info">예</a> 
+	<a href="myPage.do" class="btn btn-danger">아니오(마이페이지로 이동)</a>
 	
-
+	
+	
+	<a href="ProductUpdateForm.do?idx=${prod.prod_idx}" class="btn btn-info">수정화면</a> 
+	<a href="ProductDelete.do?idx=${prod.prod_idx}" class="btn btn-warning">삭제</a> 
 
 
 
