@@ -85,7 +85,7 @@
 			var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 			var options = { //지도를 생성할 때 필요한 기본 옵션
 				center : new kakao.maps.LatLng(latitude, longitude), //지도의 중심좌표.
-				level : 4
+				level : 5
 			//지도의 레벨(확대, 축소 정도)
 			}
 			
@@ -96,12 +96,10 @@
 			// 지도 업데이트
 			document.getElementById("schoolType").addEventListener("change", function(e) {
 				if(e.target.value === "middle") {
-					
-					
-					
 	                  // 중학교 위치로 업데이트
-	             	setCenter(35.145303,126.929504)
-	            // 마커를 표시할 위치와 title 객체 배열입니다 
+						// setCenter(35.145303,126.929504)
+						setCenter(35.149789, 126.919961);
+	            // 노란색 마커를 표시할 위치와 title 객체 배열입니다 
 	            var positions = [
 	                {
 	                    title: '조선대학교부속중학교', 
@@ -136,12 +134,25 @@
 	                        image : markerImage // 마커 이미지 
 	                    });
 	                }
+	                
+	                // 파란색 마커
+	             // 마커가 표시될 위치입니다 
+	                var markerPosition  = new kakao.maps.LatLng(35.149789, 126.919961 ); 
+
+	                // 마커를 생성합니다
+	                var marker = new kakao.maps.Marker({
+	                    position: markerPosition
+	                });
+
+	                // 마커가 지도 위에 표시되도록 설정합니다
+	                marker.setMap(map);
 	
 	            } else if(e.target.value === "high") {
 	            	
 	            
 	            	
-	                setCenter(35.149838, 126.92582); // 고등학교 위치로 업데이트
+	                //setCenter(35.149838, 126.92582); 
+	                setCenter(35.149789, 126.919961); // 고등학교 위치로 업데이트
 	            
 	             // 마커를 표시할 위치와 title 객체 배열입니다 
 		            var positions = [
@@ -178,6 +189,18 @@
 		                    image : markerImage // 마커 이미지 
 		                });
 		            }
+		            
+		            // 파란색 마커
+		             // 마커가 표시될 위치입니다 
+		                var markerPosition  = new kakao.maps.LatLng(35.149789, 126.919961); 
+
+		                // 마커를 생성합니다
+		                var marker = new kakao.maps.Marker({
+		                    position: markerPosition
+		                });
+
+		                // 마커가 지도 위에 표시되도록 설정합니다
+		                marker.setMap(map);
 	                
 	            }
 				
