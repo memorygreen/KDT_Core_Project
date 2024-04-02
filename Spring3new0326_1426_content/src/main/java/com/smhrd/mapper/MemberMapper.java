@@ -10,13 +10,11 @@ public interface MemberMapper {
 
 	public void join(Member vo);
 
-	public void findDuplicate(String user_id);
+	public Member findDuplicate(String user_id);
 
 	public Member login(Member vo);
 
-	public void memberOut(String user_id);
-
-	
+	public void UpdateSchoolInfo(Member vo);
 
 
 

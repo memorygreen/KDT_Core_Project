@@ -1,33 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smhrd.mapper.MemberMapper">
-	
-	
-	<!-- 회원가입 -->
-	<insert id="join" parameterType="com.smhrd.entity.Member">
-		INSERT INTO tb_user(user_id, user_pw, user_phone) VALUES(#{user_id}, #{user_pw}, #{user_phone})
-	</insert>
-	
-	<!-- id중복확인 -->
-	<select id="findDuplicate" parameterType="String" resultType="com.smhrd.entity.Member">
-		SELECT user_id FROM tb_user WHERE user_id=#{user_id}
-	</select>
 
+<insert id="join" parameterType="com.smhrd.entity.Member">
+	INSERT INTO tb_user(user_id, user_pw, user_phone) VALUES(#{user_id}, #{user_pw}, #{user_phone})
+</insert>
 
-	<!-- 회원탈퇴(회원 상태 탈퇴로 변경) -->
-	<!-- (로그인한 회원의 상품일 경우) 상품 거래상태 변경(거래완료로 변경!) -->
-	
-	<update id="memberOut" parameterType="String" >
-		UPDATE tb_user SET user_status = '탈퇴' WHERE user_id = #{user_id}	
-	</update>
-		
-	<!-- 로그인 -->
-	<select id="login" parameterType="com.smhrd.entity.Member" resultType="com.smhrd.entity.Member">
-		SELECT * FROM tb_user WHERE user_id=#{user_id} AND user_pw=#{user_pw}
-	 </select>
-	</mapper>
+<select id="findDuplicate" parameterType="String" resultType="com.smhrd.entity.Member">
+	SELECT user_id FROM tb_user WHERE user_id=#{user_id}
+</select>
 
-
-
-	
-	
+<select id="login" parameterType="com.smhrd.entity.Member" resultType="com.smhrd.entity.Member">
+	SELECT * FROM tb_user WHERE user_id=#{user_id} AND user_pw=#{user_pw}
+ </select>
+ 
+ <update id="UpdateSchoolInfo" parameterType="com.smhrd.entity.Member">
+ 	UPDATE tb_user SET user_sc_nm=#{user_sc_nm}, user_sc_img=#{user_sc_img} WHERE user_id=#{user_id}
+ 	 </update>
+</mapper>
