@@ -469,7 +469,7 @@
                         </br>
                         
                         <!--자영: 로그인한 회원에게만 상품등록 버튼이 보이게 하기 -->
-                        <c:if test="${not empty sessionScope.info}">
+                        <c:if test="${not empty sessionScope.info  and sessionScope.info.user_status eq '활동중'}">
 	                        <form action = "ProductForm.do">
 	                    		<button type="submit" class="btn" style="background-color: #44bd32; color: white; font-weight: bold;">상품등록 버튼(임시)</button>
 	                        </form>
