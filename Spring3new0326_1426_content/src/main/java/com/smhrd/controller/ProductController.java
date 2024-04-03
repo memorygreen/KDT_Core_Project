@@ -302,6 +302,18 @@ public class ProductController {
 						return "redirect:/Postmanagement.do";
 		}
 		
+					
+					//검색 기능
+					@RequestMapping("/CombinedSearch.do")
+					public String combinedSearch(@RequestParam("keyword") String keyword, Model model) {
+					    // 상품 제목과 내용으로 검색하는 로직을 수행
+					    List<Product> searchResult = mapper.combinedSearch(keyword);
+
+					    // 검색 결과를 모델에 담아 productList.jsp로 전달
+					    model.addAttribute("searchResult", searchResult);
+
+					    return "searchResult"; // productList.jsp로 이동
+					}
 	
 	
 	

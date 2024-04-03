@@ -89,5 +89,11 @@
 	<delete id="Delete" parameterType="int">
 		DELETE FROM tb_product WHERE prod_idx = #{prod_idx}
 	</delete>
+	
+	<!-- 상품검색 -->
+	<select id="combinedSearch" parameterType="String" resultType="com.smhrd.entity.Product">
+	    SELECT * FROM tb_product WHERE prod_name LIKE CONCAT('%', #{keyword}, '%')
+	    OR prod_desc LIKE CONCAT('%', #{keyword}, '%')
+	</select>
 	 
 </mapper>

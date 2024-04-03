@@ -60,7 +60,8 @@ public interface ProductMapper {
 	public void Delete(int prod_idx);	
 	
 
-
+	//검색
+	public List<Product> combinedSearch(String keyword);
 
 
 

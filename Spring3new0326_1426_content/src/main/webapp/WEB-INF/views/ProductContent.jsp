@@ -356,65 +356,31 @@
 	<!-- 검색창 있는 쪽 -->
 	<!-- Hero Section Begin -->
 
-	<section class="hero hero-normal">
-		<div class="container">
-			<div class="row">
-
-				<div class="col-lg-3">
-					<!-- 카테고리 없애기(검색창을 가운데에 두기 위해 div 태그 공간 남기고 주석처리만)
-                    <div class="hero__categories">
-                        <div class="hero__categories__all">
-                            <i class="fa fa-bars"></i>
-                            <span>All departments</span>
+	<section class="hero">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    
+                </div>
+                <div class="col-lg-9">
+                    <div class="hero__search">
+                        <div class="hero__search__form">
+                            <form action="CombinedSearch.do" method="GET" class="form-inline">
+                               <div class="form-group">
+                                
+                                <input type="text"  class="form-control" id="searchKeyword" name="keyword" placeholder="아껴쓰고 나눠쓰고 바꿔쓰고 다시씁시다.">
+                                </div>
+                                <button type="submit" class="site-btn">SEARCH</button>
+                            </form>
                         </div>
-                        <ul>
-                            <li><a href="#">Fresh Meat</a></li>
-                            <li><a href="#">Vegetables</a></li>
-                            <li><a href="#">Fruit & Nut Gifts</a></li>
-                            <li><a href="#">Fresh Berries</a></li>
-                            <li><a href="#">Ocean Foods</a></li>
-                            <li><a href="#">Butter & Eggs</a></li>
-                            <li><a href="#">Fastfood</a></li>
-                            <li><a href="#">Fresh Onion</a></li>
-                            <li><a href="#">Papayaya & Crisps</a></li>
-                            <li><a href="#">Oatmeal</a></li>
-                            <li><a href="#">Fresh Bananas</a></li>
-                        </ul>
-                    </div>-->
-				</div>
+                        
+                    </div>
 
-				<!-- 검색창 -->
-				<div class="col-lg-9">
-					<div class="hero__search">
-						<div class="hero__search__form">
-							<form action="#">
-								<!--검색결과창으로 이동하게 해야할 것 같아요-->
-								<div class="hero__search__categories">
-									All Categories
-									 <span class="arrow_carrot-down"></span>
-								</div>
-								<input type="text" placeholder="구매하고 싶은 물건을 검색해보세요!">
-								<button type="submit" class="site-btn">검색</button>
-							</form>
-						</div>
-
-						<!-- 우측 상단 전화번호 나오는 곳 
-                        <div class="hero__search__phone">
-                            <div class="hero__search__phone__icon">
-                                <i class="fa fa-phone"></i>
-                            </div>
-                            <div class="hero__search__phone__text">
-                                <h5>+65 11.188.888</h5>
-                                <span>support 24/7 time</span>
-                            </div>
-                        </div>
-                        -->
-					</div>
-				</div>
-				<!-- 검색창 끝나는 부분-->
-			</div>
-		</div>
-	</section>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
 	<!-- Hero Section End -->
 
 
