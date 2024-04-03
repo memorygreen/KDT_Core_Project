@@ -110,15 +110,31 @@
 
                 <li>
                 
-                    <c:if test="${not empty sessionScope.info}">
-	                	<a href="myPage.do">  <!-- 마이페이지로 이동하게 변경 필요 -->
-	                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-person" viewBox="0 0 16 16">
-	                        <path d="M11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-	                        <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2v9.255S12 12 8 12s-5 1.755-5 1.755V2a1 1 0 0 1 1-1h5.5z"/>
-	                    </svg>
-	                    마이페이지
-	                    </a>
-					</c:if>
+                    <!-- 반응형웹 -->
+					<!-- 마이페이지 또는 관리자 페이지 -->
+					 <c:choose>
+					    <c:when test="${not empty sessionScope.info and sessionScope.info.user_role eq 'A'}">
+					       
+			                <!-- 관리자 페이지로 이동하는 링크 -->
+			                <a href="AdministratorList.do">
+			                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-person" viewBox="0 0 16 16">
+			                        <path d="M11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+			                        <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2v9.255S12 12 8 12s-5 1.755-5 1.755V2a1 1 0 0 1 1-1h5.5z"/>
+			                    </svg>
+			                    관리자페이지
+			                </a>
+			            </c:when>
+		         	    <c:when test="${not empty sessionScope.info and sessionScope.info.user_role eq 'u'}">
+			                <!-- 마이페이지로 이동하는 링크 -->
+			                <a href="myPage.do"> 
+			                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-person" viewBox="0 0 16 16">
+			                        <path d="M11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+			                        <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2v9.255S12 12 8 12s-5 1.755-5 1.755V2a1 1 0 0 1 1-1h5.5z"/>
+			                    </svg>
+			                    마이페이지
+			                </a>
+			            </c:when>
+					</c:choose>
                 </li>
                                
                 <li><a href="#">
@@ -196,12 +212,14 @@
 					<!-- 최상단 고정 메뉴바 우측  -->
                     <div class="col-lg-6 col-md-6">
                         <div class="header__top__right">
-                        	<div class="header__top__right__social">
                         	<c:if test="${not empty sessionScope.info}">
+                        	<div class="header__top__right__social">
+                        	
                         		<span fonr-size="20px">${sessionScope.info.user_id}님 환영합니다</span>
+                        	</div>
                         	</c:if>
                         	
-                        	</div>
+                        	
                             <div class="header__top__right__social">
                                 <!--  
                                 <a href="#"><i class="fa fa-facebook"></i></a>
@@ -217,30 +235,35 @@
                             </div>
                             
                             <!-- 로그인 했을 때에만 마이페이지 보이게 하기  -->
-                            <c:if test="${not empty sessionScope.info}">
-	                            <div class="header__top__right__language">
-	                            	<!-- 마이페이지 -->
-	                            	<!-- 로그인 전이면 안 보이게 하는 조건문 추가 필요 -->
-		                            <a href="myPage.do"> 
-		                            		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
-		 										<path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z"/>
-		  										<path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z"/>
-											</svg> 마이페이지
-									</a>
-									
-	                                <!--언어선택 리스트 주석처리
-	                                <img src="img/language.png" alt="">
-	                                <div>English</div>
-	                                <span class="arrow_carrot-down"></span>
-	                                  
-	                                <ul>
-	                                    <li><a href="#">Spanis</a></li>
-	                                    <li><a href="#">English</a></li>
-	                                </ul>-->
-	                                
-	                            </div>
                             
-                            </c:if>
+                           <c:choose>
+							    <c:when test="${not empty sessionScope.info and sessionScope.info.user_role eq 'A'}">
+							       <div class="header__top__right__language">
+					                <!-- 관리자 페이지로 이동하는 링크 -->
+					                <a href="AdministratorList.do">
+					                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-person" viewBox="0 0 16 16">
+					                        <path d="M11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+					                        <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2v9.255S12 12 8 12s-5 1.755-5 1.755V2a1 1 0 0 1 1-1h5.5z"/>
+					                    </svg>
+					                    관리자페이지
+					                </a>
+					                </div>
+					            </c:when>
+				         	    <c:when test="${not empty sessionScope.info and sessionScope.info.user_role eq 'u'}">
+					                <!-- 마이페이지로 이동하는 링크 -->
+					                <div class="header__top__right__language">
+					                <a href="myPage.do"> 
+					                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-person" viewBox="0 0 16 16">
+					                        <path d="M11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+					                        <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2v9.255S12 12 8 12s-5 1.755-5 1.755V2a1 1 0 0 1 1-1h5.5z"/>
+					                    </svg>
+					                    마이페이지
+					                </a>
+					                </div>
+					            </c:when>
+							</c:choose>
+							
+                            
                             <!-- 로그인 상태면 로그아웃으로 보이게, 로그아웃상태면 로그인으로 보이게 -->
                             <c:choose>
 								<c:when test="${not empty sessionScope.info}">

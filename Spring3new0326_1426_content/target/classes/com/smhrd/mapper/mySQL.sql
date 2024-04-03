@@ -54,7 +54,6 @@ SELECT * FROM tb_reply;
 
 SELECT * FROM tb_product; 
 
-
 DROP TABLE tb_product;
 
 COMMIT;
@@ -86,7 +85,9 @@ VALUES (1, '테스트용제품명' ,'테스트용 제품설명 입니다.', 1234
 INSERT INTO tb_product (prod_idx, prod_name, prod_desc, prod_price, seller_id, prod_views, prod_rpt_cnt, created_at, prod_sold_dt, prod_img_path, prod_status) 
 VALUES (2, '테스트용222가방' ,'테스트용 제품설명 입니다.', 2222222, 'test2', 0,0, '2024-03-25', '2024-03-25', '임시경로', '활동중(임시)')
 
-
+-- 관리자
+INSERT INTO tb_user (user_id, user_pw, user_phone, user_birthdate, user_role) 
+		VALUES ('ASD', 1234, '010-1111-1111', '1999-09-09', 'A');
 
 
 DELETE FROM REPLY;

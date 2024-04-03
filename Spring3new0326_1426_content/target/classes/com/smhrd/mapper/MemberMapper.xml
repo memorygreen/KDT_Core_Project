@@ -17,4 +17,30 @@
  <update id="UpdateSchoolInfo" parameterType="com.smhrd.entity.Member">
  	UPDATE tb_user SET user_sc_nm=#{user_sc_nm}, user_sc_img=#{user_sc_img} WHERE user_id=#{user_id}
  	 </update>
+ 	 
+ <select id="AdministratorList" parameterType="String" resultType="com.smhrd.entity.Member">
+	SELECT * FROM tb_user 
+</select>
+
+ <!-- 회원 정보 전체보기 -->
+<select id="UserInformation" resultType="com.smhrd.entity.Member">
+        SELECT * FROM tb_user
+</select>
+
+<!-- 회원 상세보기 -->
+<select id="UserContent" parameterType="String" resultType="com.smhrd.entity.Member">
+        SELECT * FROM tb_user WHERE user_id = #{user_id}
+</select>
+
+<!-- 관리자 회원 정보 수정 -->
+<update id="userInfoChange" parameterType="String">
+		UPDATE tb_user SET user_phone = #{user_phone}, user_status = #{user_status}
+		WHERE user_id = #{user_id}
+</update>
+
+<!-- 회원 게시글 내용보기 -->
+<select id="PostContent" parameterType="String" resultType="com.smhrd.entity.Member">
+        SELECT * FROM tb_user WHERE user_id = #{user_id}
+</select>	
+
 </mapper>

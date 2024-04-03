@@ -272,7 +272,35 @@ public class ProductController {
 			return my_prod_list; //리스트 전달
 		}
 		
-		
+		// 게시글 목록
+				@RequestMapping("/Postmanagement.do")
+					public String Postmanagement(Model model) {
+					System.out.println("상품 전체보기 기능");
+					List<Product> list = mapper.Postmanagement();
+					model.addAttribute("list",list);
+								
+					return"Postmanagement";
+			}
+					
+				
+				
+				// 게시글 수정하는 페이지
+				@RequestMapping("/ModifyingPosts.do")
+				public String ModifyingPosts(@RequestParam("prod_idx") int prod_idx, Model model) {
+					System.out.println("게시글수정 페이지");
+					Product Modifying =mapper.ModifyingPosts(prod_idx);
+					model.addAttribute("Modifying",Modifying);
+					return "ModifyingPosts";
+			}
+				
+				
+				// 게시글 정보 삭제하는 기능!!
+					@RequestMapping("/Delete.do")
+					public String Delete(@RequestParam("prod_idx") int prod_idx) {
+						System.out.println("게시글 삭제 기능");		
+						mapper.Delete(prod_idx);
+						return "redirect:/Postmanagement.do";
+		}
 		
 	
 	
