@@ -76,6 +76,98 @@
   </div>
 </div>
 
+
+<!--  임시 추가(240401 19:29 -->
+
+<script>
+
+
+//폼 제출 시 욕설 체크 후 폼 제출
+$('#productForm').submit(function(event) {
+    // 상품명과 상품 설명을 가져옴
+    var prodName = $('input[name="prod_name"]').val();
+    var prodDesc = $('textarea[name="prod_desc"]').val();
+
+    // 욕설이 포함되어 있는지 확인
+    if (containsBadWords(prodName, prodDesc)) {
+        alert("상품명 또는 설명에 욕설이 포함되어 있습니다.");
+        event.preventDefault(); // 욕설이 포함되었을 때 폼 제출 방지
+    } else {
+        // 욕설이 포함되지 않았을 경우 폼 제출
+        $.ajax({
+            url: 'ProductInsert.do',
+            type: 'post',
+            enctype: 'multipart/form-data',
+            data: $('#productForm').serialize(),
+            success: function(response) {
+                alert(response); // 서버로부터 받은 메시지를 알림창으로 표시
+            },
+            error: function(xhr, status, error) {
+                console.log(error); // 에러가 발생한 경우 콘솔에 로그 출력
+            }
+        });
+    }
+});
+
+// 욕설 체크 함수
+function containsBadWords(prodName, prodDesc) {
+    var badWordList = ["ㅅㅂ", "씨발"];
+    for (var i = 0; i < badWordList.length; i++) {
+        if (prodName.includes(badWordList[i]) || prodDesc.includes(badWordList[i])) {
+            return true;
+        }
+    }
+    return false;
+}
+
+
+
+
+
+
+
+
+
+// 아무런 반응도 없는 것 같다(240401 20:21)
+/*
+function submitForm() {
+    // 상품명과 상품 설명을 가져옴
+    var prodName = document.getElementsByName("prod_name")[0].value;
+    var prodDesc = document.getElementsByName("prod_desc")[0].value;
+
+    // 욕설이 포함되어 있는지 확인
+    if (containsBadWords(prodName, prodDesc)) {
+        alert("상품명 또는 설명에 욕설이 포함되어 있습니다.");
+    } else {
+        // 욕설이 포함되지 않았을 경우 폼을 제출
+        $.ajax({
+            url: 'ProductInsert.do',
+            type: 'post',
+            enctype: 'multipart/form-data',
+            data: $('#productForm').serialize(),
+            success: function(response) {
+                alert(response); // 서버로부터 받은 메시지를 알림창으로 표시
+            },
+            error: function(xhr, status, error) {
+                console.log(error); // 에러가 발생한 경우 콘솔에 로그 출력
+            }
+        });
+    }
+}
+
+// 욕설 체크 함수
+function containsBadWords(prodName, prodDesc) {
+    var badWordList = ["ㅅㅂ", "씨발"];
+    for (var i = 0; i < badWordList.length; i++) {
+        if (prodName.includes(badWordList[i]) || prodDesc.includes(badWordList[i])) {
+            return true;
+        }
+    }
+    return false;
+}
+*/
+</script>
+
 </body>
 </html>
 

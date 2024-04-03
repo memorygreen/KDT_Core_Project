@@ -31,6 +31,15 @@ PRIMARY KEY (prod_idx)
 );
 
 
+-- 상품 게시글 별 댓글 개수 확인용
+SELECT p.*, COUNT(r.reply_idx) AS reply_count
+        FROM tb_product p
+        LEFT JOIN tb_reply r ON p.prod_idx = r.prod_idx
+        GROUP BY p.prod_idx
+        ORDER BY reply_count DESC , prod_name;
+        
+        
+        
 DROP TABLE tb_reply;
 --tb_reply 테이블 생성
 CREATE TABLE tb_reply(
@@ -58,8 +67,11 @@ VALUES ('테스트용제품명' ,'테스트용 제품설명 입니다.', 123456,
 INSERT INTO tb_product (prod_name, prod_desc, prod_price, seller_id, prod_sold_dt, prod_img_path) 
 		VALUES ('테스트용제품명' ,'테스트용 제품설명 입니다.', 123456, 'testID', '2024-03-25', '임시경로')
 
--- tb_user 테이블 확인
+-- tb_product 테이블 확인
 SELECT * FROM tb_product;
+
+-- tb_user 테이블 확인
+SELECT * FROM tb_user;
 
 
 -- 상품 임시데이터 생성(jyk)

@@ -5,7 +5,32 @@
 	<!-- 상품 목록 조회(최신순)--> 
 	<select id="ProductList" resultType="com.smhrd.entity.Product">
 		SELECT * FROM tb_product
+		ORDER BY created_at DESC;
 	</select>	
+	
+	
+	<!-- 상품 목록 조회(조회수많은순)--> 
+	<select id="ProductViewsList" resultType="com.smhrd.entity.Product">
+		SELECT * FROM tb_product 
+		ORDER BY prod_views DESC;
+	</select>	
+	
+	
+	<!-- 상품 목록 조회(낮은 가격순) (오름차순)--> 
+	<select id="ProductLowestPriceList" resultType="com.smhrd.entity.Product">
+		SELECT * FROM tb_product 
+		ORDER BY prod_price;
+	</select>	
+	
+	
+	<!-- 상품 목록 조회(댓글개수 많은순) (내림차순) -->
+	<select id="ProductReplyList" resultType="com.smhrd.entity.Product">
+	SELECT p.*, COUNT(r.reply_idx) AS reply_count
+        FROM tb_product p
+        LEFT JOIN tb_reply r ON p.prod_idx = r.prod_idx
+        GROUP BY p.prod_idx
+        ORDER BY reply_count DESC, prod_name ASC;
+	</select>
 	
 	<!-- 상품 등록 -->
 	<insert id="ProductInsert" parameterType="com.smhrd.entity.Product"><!-- 판매완료날짜 뺌 -->
@@ -50,10 +75,19 @@
 		WHERE seller_id = #{seller_id}
 	</select>
 	
+	<!-- 관리자 게시글 상세보기 -->
+	<select id="ModifyingPosts" parameterType="int" resultType="com.smhrd.entity.Product">
+		SELECT * FROM tb_product WHERE prod_idx = #{prod_idx}
+	</select>
 	
+	<!-- 관리자 게시글 목록 조회 --> 
+	<select id="Postmanagement" resultType="com.smhrd.entity.Product">
+		SELECT * FROM tb_product
+	</select>
 	
-	
-	
-	
+	<!-- 관리자 게시글 삭제 -->
+	<delete id="Delete" parameterType="int">
+		DELETE FROM tb_product WHERE prod_idx = #{prod_idx}
+	</delete>
 	 
 </mapper>

@@ -414,32 +414,42 @@
         <div class="container">
             <div class="row">
                 <div class="categories__slider owl-carousel">
+                    
+                    <!-- 여기 -->
+                    
+                    <c:forEach items="${prod_list}" var="prod" varStatus="i" begin="0" end="4">
+	                    <div class="col-lg-3">
+	                        <div class="categories__item set-bg" data-setbg="resources/img/saveimg/${prod.prod_img_path}">
+  								<h5><a href="ProductContent.do?prod_idx=${prod.prod_idx}">${prod.prod_name}</a></h5>
+	                        </div>
+	                    </div>
+                    </c:forEach>
+                    <!-- 2-5번째 
                     <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="resources/img/categories/가방4.jpg">
-                            <h5><a href="#">db에서 상품제목 가져와야해요1</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        
                         <div class="categories__item set-bg" data-setbg="resources/img/categories/가방105.jpg">
                             <h5><a href="#">db에서 상품제목 가져와야해요2</a></h5>
                         </div>
                     </div>
+                    
                     <div class="col-lg-3">
                         <div class="categories__item set-bg" data-setbg="resources/img/categories/가방132.jpg">
                             <h5><a href="#">db에서 상품제목 가져와야해요3</a></h5>
                         </div>
                     </div>
+                    
                     <div class="col-lg-3">
                         <div class="categories__item set-bg" data-setbg="resources/img/categories/가방137.jpg">
                             <h5><a href="#">db에서 상품제목 가져와야해요4</a></h5>
                         </div>
                     </div>
+                    
                     <div class="col-lg-3">
                         <div class="categories__item set-bg" data-setbg="resources/img/categories/가방164.jpg">
                             <h5><a href="#">db에서 상품제목 가져와야해요5</a></h5>
                         </div>
                     </div>
+                    -->
+                    
                 </div>
             </div>
         </div>
@@ -458,8 +468,8 @@
                         </br>
                         </br>
                         
-                        <!-- 로그인한 회원에게만 상품등록 버튼이 보이게 하기 -->
-                        <c:if test="${not empty sessionScope.info}">
+                        <!--자영: 로그인한 회원에게만 상품등록 버튼이 보이게 하기 -->
+                        <c:if test="${not empty sessionScope.info  and sessionScope.info.user_status eq '활동중'}">
 	                        <form action = "ProductForm.do">
 	                    		<button type="submit" class="btn" style="background-color: #44bd32; color: white; font-weight: bold;">상품등록 버튼(임시)</button>
 	                        </form>
@@ -525,6 +535,7 @@
                             </ul>
                         </div>
                         
+                        <!--  상품 목록 -->
                         <!-- 상품 사진 아래 정보 나오는 부분 div -->
                         <div class="featured__item__text">
 	                        <h6 style="font-weight: bold; display: inline-block; padding: 5px 10px; 
@@ -540,10 +551,6 @@
                             </br>
                             <span style="font-size: 13px;">조회수 ${prod.prod_views}</span>
                             </br>
-                            
-                            
-                            
-                            
                         </div>
                     </div>
                 </div>
@@ -695,210 +702,125 @@
 	
 	
 	
-	<!-- 순위별 보기 3개 시작-->
+	<!-- 자영"순위별 보기 3개 시작-->
     <!-- Latest Product Section Begin -->
     <section class="latest-product spad">
         <div class="container">
             
-            <!--  조회순 보기-->
+            <!-- 자영:조회순 보기-->
             <div class="row">
                 <div class="col-lg-4 col-md-6">
                     <div class="latest-product__text">
-                        <h4>조회순</h4>
+                        <h4>조회수순</h4>
                         <div class="latest-product__slider owl-carousel">
+                        	<!-- 1~3번째 (0번 ~2번 인덱스)반복 -->
                             <div class="latest-prdouct__slider__item">
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="controller/resources/img/latest-product/lp-1.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-2.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="controller/resources/img/latest-product/lp-3.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="latest-prdouct__slider__item">
+                                <c:forEach items="${prod_views_list}" var="prod_views" begin="0" end="2" varStatus="i">
                                 <a href="#" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="img/latest-product/lp-1.jpg" alt="">
                                     </div>
                                     <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
+                                        <h6><a href="ProductContent.do?prod_idx=${prod_views.prod_idx}">${prod_views.prod_name}</a></h6> 
+                                        <span>${prod_views.prod_price}</span> 
                                     </div>
                                 </a>
+                                </c:forEach>
+                                
+                            </div>
+                            <!-- 4~6번째 (3번 ~5번 인덱스)반복 -->
+                            <div class="latest-prdouct__slider__item">
+                            	<c:forEach items="${prod_views_list}" var="prod_views" begin="3" end="5" varStatus="i">
                                 <a href="#" class="latest-product__item">
                                     <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-2.jpg" alt="">
+                                        <img src="img/latest-product/lp-1.jpg" alt="">
                                     </div>
                                     <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
+                                        <h6><a href="ProductContent.do?prod_idx=${prod_views.prod_idx}">${prod_views.prod_name}</a></h6> 
+                                        <span>${prod_views.prod_price}</span>
                                     </div>
                                 </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-3.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
+                                </c:forEach>
                             </div>
                         </div>
                     </div>
-                </div> <!--  조회순 보기 끝-->               
+                </div> <!-- 조회수순 보기 끝-->
                 
-                <!--  최저가순 보기-->
+                
+                <!-- 자영: 최저가순 보기-->
                 <div class="col-lg-4 col-md-6">
                     <div class="latest-product__text">
                         <h4>최저가순</h4>
                         <div class="latest-product__slider owl-carousel">
                             <div class="latest-prdouct__slider__item">
+                                <c:forEach items="${prod_lowest_price_list}" var="prod_lowest" begin="0" end="2" varStatus="i">
+                                <!-- 1~3번째 (0번 ~2번 인덱스)반복 -->
                                 <a href="#" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="img/latest-product/lp-1.jpg" alt="">
                                     </div>
                                     <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
+                                        <h6><a href="ProductContent.do?prod_idx=${prod_lowest.prod_idx}">${prod_lowest.prod_name}</a></h6> <!-- 첫번째 상품 제목 -->
+                                        <span>${prod_lowest.prod_price}</span> <!-- 첫번째 상품 가격 -->
                                     </div>
                                 </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-2.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-3.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
+                                </c:forEach>
                             </div>
+                            
                             <div class="latest-prdouct__slider__item">
+                               	<c:forEach items="${prod_lowest_price_list}" var="prod_lowest" begin="3" end="5" varStatus="i">
+                                <!-- 4~6번째 (3번 ~5번 인덱스)반복 -->
                                 <a href="#" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="img/latest-product/lp-1.jpg" alt="">
                                     </div>
                                     <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
+                                        <h6><a href="ProductContent.do?prod_idx=${prod_lowest.prod_idx}">${prod_lowest.prod_name}</a></h6> <!-- 첫번째 상품 제목 -->
+                                        <span>${prod_lowest.prod_price}</span> <!-- 첫번째 상품 가격 -->
                                     </div>
                                 </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-2.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                        
-                                        
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-3.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
+                                </c:forEach>
                             </div>
                         </div>
                     </div>
                 </div>   <!-- 최저가순 보기 끝 -->
                 
-                <!--  가까운 학교순 보기-->
+                <!--  댓글많은 순 보기-->
                 <div class="col-lg-4 col-md-6">
                     <div class="latest-product__text">
                         <h4>댓글 많은 순 </h4>
                         <div class="latest-product__slider owl-carousel">
                             <div class="latest-prdouct__slider__item">
+                                
+                                <c:forEach items="${prod_reply_list}" var="prod_reply" begin="0" end="2" varStatus="i">
+                                <!-- 4~6번째 (3번 ~5번 인덱스)반복 -->
                                 <a href="#" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="img/latest-product/lp-1.jpg" alt="">
                                     </div>
                                     <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
+                                        <h6><a href="ProductContent.do?prod_idx=${prod_reply.prod_idx}">${prod_reply.prod_name}</a></h6> <!-- 첫번째 상품 제목 -->
+                                        <span>${prod_reply.prod_price}</span> <!-- 첫번째 상품 가격 -->
                                     </div>
                                 </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-2.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-3.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
+                                </c:forEach>
+                                
+                                
                             </div>
                             <div class="latest-prdouct__slider__item">
+                                <c:forEach items="${prod_reply_list}" var="prod_reply" begin="3" end="5" varStatus="i">
+                                <!-- 4~6번째 (3번 ~5번 인덱스)반복 -->
                                 <a href="#" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="img/latest-product/lp-1.jpg" alt="">
                                     </div>
                                     <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
+                                        <h6><a href="ProductContent.do?prod_idx=${prod_reply.prod_idx}">${prod_reply.prod_name}</a></h6> <!-- 첫번째 상품 제목 -->
+                                        <span>${prod_reply.prod_price}</span> <!-- 첫번째 상품 가격 -->
                                     </div>
                                 </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-2.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-3.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
+                                </c:forEach>
+                                
                             </div>
                         </div>
                     </div>

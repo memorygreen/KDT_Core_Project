@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -44,19 +45,38 @@ public class ProductController {
 	}
 	
 	
-	
+	// 상품 목록 조회 (전체, 조회수순, 최저가순, 댓글 많은 순) 
 	@RequestMapping("/ProductList.do")
 	public List<Product> ProductList(Model model, HttpSession session){
+		
+		// 상품 전체 보기(메인)
 		System.out.println("상품 전체보기 기능new");
 		List<Product> prod_list = mapper.ProductList();
 //		model.addAttribute("prod_list", prod_list); //request
 		session.setAttribute("prod_list", prod_list); //어차피 서버에 저장돼서 세션에 저장하는게 의미가 없을 듯 
+		
+		// 조회순 보기
+		System.out.println("상품 조회수순 보기");
+		List<Product> prod_views_list = mapper.ProductViewsList();
+		session.setAttribute("prod_views_list", prod_views_list);  
+		
+		// 최저가순
+		System.out.println("최저가순 보기");
+		List<Product> prod_lowest_price_list = mapper.ProductLowestPriceList();
+		session.setAttribute("prod_lowest_price_list", prod_lowest_price_list); 
+				
+		// 댓글 많은순 보기 
+		System.out.println("상품 댓글 많은 순 보기");
+		List<Product> prod_reply_list = mapper.ProductReplyList();
+		session.setAttribute("prod_reply_list", prod_reply_list);
 		
 		
 		//System.out.println(prod_list);// 확인용
 		return prod_list;
 		
 	}
+	
+	
 	
 	@RequestMapping("/ProductForm.do")
 	public String ProductForm() {
@@ -65,24 +85,31 @@ public class ProductController {
 	}
 	
 	
+	
+	// 자영추가(240401 19:21)
+	
 	@RequestMapping("/ProductInsert.do")
-	public String ProductInsert(HttpServletRequest request, HttpSession session) {
-	    
+	public String ProductInsert(HttpServletRequest request, HttpSession session, Product prod) {
+	    	
 			System.out.println("게시글 입력 기능");
 			
+			//세션에 입력된 로그인한 회원 확인
+			System.out.println("로그인 여부 확인(세션 값 확인하기");
 			Member loginUser = (Member) session.getAttribute("info");//로그인한 회원의 정보를 세션에서 가져와서 loginUser라는 변수에 넣기
 			if(loginUser == null) { //만약 로그인한 회원 정보가 없다면?(로그인x상태라면) 로그인페이지로 리다이렉트
 				return "redirect:/login.do"; 
 			}
 			
-			
-			//파일을 서버 폴더에 저장하는 객체	
+			System.out.println("multi객체 생성");
+			//파일을 서버 폴더에 저장하는 객체	(240401 19:38이동)
 			MultipartRequest multi = null;
 			
+			System.out.println("값 설정");
 			int fileMaxSize = 10 * 1024 * 10000; //파일크기
 			String savePath = request.getRealPath("/resources/img/saveimg"); //저장경로
 			System.out.println(savePath);
 			
+			System.out.println("try catch  설정");
 			try {
 				multi = new MultipartRequest(request, savePath, fileMaxSize, "UTF-8", new DefaultFileRenamePolicy());
 				//요청정보가진 request, 저장경로, 파일최대크기, 인코딩, 중복처리(파일명 같을 시 뒤에 숫자붙여주는 객체)
@@ -91,18 +118,23 @@ public class ProductController {
 				e.printStackTrace();
 			}
 			
+			System.out.println("multi에 있는 값들 가져오기");
 			String prod_name = multi.getParameter("prod_name");
 			String prod_desc = multi.getParameter("prod_desc");
 			String prod_img_path = multi.getFilesystemName("prod_img_path");
 			String prod_price = multi.getParameter("prod_price");
 			int prod_price_num = Integer.parseInt(prod_price);
-			
-			
 			String seller_id = loginUser.getUser_id(); // seller_id에 로그인한 회원(loginUser)의 아이디 넣기
-			
-			//product(DTO) 객체 생성
-			Product prod = new Product();
 
+			
+			// 욕설을 체크할 문자열 배열
+			System.out.println("욕설 배열 생성");
+		    String[] BadWordList = {"ㅅㅂ", "씨발"}; // 욕설 내용 확인 필요
+
+		    
+		    
+		    // 먼저 set을 해줘야하잖아!!!!
+		    System.out.println("product dto에 multi에 있는 값 넣어주기");
 			prod.setProd_name(prod_name);
 			prod.setProd_desc(prod_desc);
 			prod.setProd_img_path(prod_img_path);
@@ -110,13 +142,51 @@ public class ProductController {
 			prod.setSeller_id(seller_id); // 로그인한 회원(loginUser)의 id를 product(DTO)의seller_id에 넣기
 			
 			System.out.println(prod.toString());//test용
-			
+		    
+		    System.out.println("욕설 포함 확인 조건문");
+		    // 욕설이 포함되어 있는지 확인
+		    if (containsBadWords(prod.getProd_name(), prod.getProd_desc(), BadWordList)) {
+		        // 욕설이 포함되어 있으면 다시 상품등록 폼으로 리다이렉트
+		        return "redirect:/ProductForm.do";
+		    }
+		    
+			// insert문 요청(욕설 및 비속어가 포함되지  경우)
 			mapper.ProductInsert(prod);	
 			
 			//return "boardList";
 			return "redirect:/ProductList.do";
 		
 	}
+	
+	/**********************************************************/
+	
+	
+	// 추가 (240401 1954)
+	// 욕설 체크 메서드
+	private boolean containsBadWords(String prodName, String prodDesc, String[] badWordList) {
+		 if (prodName == null || prodDesc == null || badWordList == null) {
+		     System.out.println("욕설체크 메소드 null값일 경우");   
+			 return false; // 또는 예외 처리를 할 수 있습니다.
+		    }
+		
+		for (String badWord : badWordList) {
+	        if (prodName.contains(badWord) || prodDesc.contains(badWord)) {
+	            return true;
+	        }
+	    }
+	    return false;
+	}
+	
+	/**********************************************************/
+	
+	
+	
+	// AJAX 요청 처리 메소드
+    @RequestMapping("/ajax/ProductInsert.do")
+    public @ResponseBody String ajaxProductInsert(HttpServletRequest request, HttpSession session, Product prod) {
+        // 요청 처리 및 데이터베이스 삽입 로직
+        return "Product inserted successfully!";
+    }
 	
 	
 	@RequestMapping("/ProductContent.do")
@@ -176,14 +246,8 @@ public class ProductController {
 			return "redirect:/ProductContent.do?prod_idx="+reply.getProd_idx();//댓글작성 완료 후 해당 상품번호의 상세보기 화면으로 이동 
 
 		}
-		
-		
-		
-		
-		
-		
-		
-	// 내 상품 게시글 목록 모아보기
+
+		// 내 상품 게시글 목록 모아보기
 		@RequestMapping("/goMyProductList.do")
 		public String goMyProductList(Model model ,HttpSession session, @RequestParam("user_id") String user_id) {
 			System.out.println("내 게시글 목록으로 이동");
@@ -208,7 +272,35 @@ public class ProductController {
 			return my_prod_list; //리스트 전달
 		}
 		
-		
+		// 게시글 목록
+				@RequestMapping("/Postmanagement.do")
+					public String Postmanagement(Model model) {
+					System.out.println("상품 전체보기 기능");
+					List<Product> list = mapper.Postmanagement();
+					model.addAttribute("list",list);
+								
+					return"Postmanagement";
+			}
+					
+				
+				
+				// 게시글 수정하는 페이지
+				@RequestMapping("/ModifyingPosts.do")
+				public String ModifyingPosts(@RequestParam("prod_idx") int prod_idx, Model model) {
+					System.out.println("게시글수정 페이지");
+					Product Modifying =mapper.ModifyingPosts(prod_idx);
+					model.addAttribute("Modifying",Modifying);
+					return "ModifyingPosts";
+			}
+				
+				
+				// 게시글 정보 삭제하는 기능!!
+					@RequestMapping("/Delete.do")
+					public String Delete(@RequestParam("prod_idx") int prod_idx) {
+						System.out.println("게시글 삭제 기능");		
+						mapper.Delete(prod_idx);
+						return "redirect:/Postmanagement.do";
+		}
 		
 	
 	
