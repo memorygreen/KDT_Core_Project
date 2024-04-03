@@ -78,7 +78,7 @@
             <div class="header__cart__price">item: <span>$150.00</span></div>
             -->
 		</div>
-
+		
 		<!-- 반응형 메뉴바 내 위젯 주석처리
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
@@ -203,7 +203,12 @@
 					<!-- 최상단 고정 메뉴바 우측  -->
 					<div class="col-lg-6 col-md-6">
 						<div class="header__top__right">
-
+							<c:if test="${not empty sessionScope.info}">
+								<div class="header__top__right__social">
+									<span fonr-size="20px">${sessionScope.info.user_id}님
+										환영합니다</span>
+								</div>
+							</c:if>
 							<div class="header__top__right__social">
 								<!--  
                                 <a href="#"><i class="fa fa-facebook"></i></a>
@@ -325,8 +330,6 @@
 								</a>
 							</li>
 							 -->
-
-							<!--  관리자 페이지 보여줘야하나? -->
 
 						</ul>
 

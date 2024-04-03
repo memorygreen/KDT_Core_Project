@@ -20,7 +20,7 @@ public class Member {
 	private String user_sc_img;
 	private String user_status;
 	private Date joined_at;
-	private char user_role;
+	private String user_role;
 
 //	public Member(String id, String pw, String phone) {
 //		super();
