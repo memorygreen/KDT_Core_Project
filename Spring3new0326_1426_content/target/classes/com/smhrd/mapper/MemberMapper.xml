@@ -3,7 +3,7 @@
 <mapper namespace="com.smhrd.mapper.MemberMapper">
 
 <insert id="join" parameterType="com.smhrd.entity.Member">
-	INSERT INTO tb_user(user_id, user_pw, user_phone, user_nm) VALUES(#{user_id}, #{user_pw}, #{user_phone}, #{user_nm})
+	INSERT INTO tb_user(user_id, user_pw, user_phone, user_nm, user_birthdate) VALUES(#{user_id}, #{user_pw}, #{user_phone}, #{user_nm}, #{user_birthdate})
 </insert>
 
 <select id="findDuplicate" parameterType="String" resultType="com.smhrd.entity.Member">
@@ -42,4 +42,18 @@
 <select id="AdministratorList" resultType="com.smhrd.entity.Member">
         SELECT * FROM tb_user
 </select>
+
+
+
+<!-- 회원탈퇴(회원 상태 탈퇴로 변경) -->
+   <!-- (로그인한 회원의 상품일 경우) 상품 거래상태 변경(거래완료로 변경!) -->
+   
+   <update id="memberOut" parameterType="String" >
+      UPDATE tb_user SET user_status = '탈퇴' WHERE user_id = #{user_id}   
+   </update>
+
+
+
+
+
 </mapper>
