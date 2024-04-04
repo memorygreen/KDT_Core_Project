@@ -33,8 +33,8 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th scope="row">닉네임</th>
-                                <td></td>
+                                <th scope="row">이름</th>
+                                <td>${vo.user_nm}</td>
                                 <th>아이디</th>
                                 <td>${vo.user_id}</td>
                             </tr>

@@ -63,6 +63,10 @@ public interface ProductMapper {
 	//검색
 	public List<Product> combinedSearch(String keyword);
 
+	public List<Product> PostContent(String seller_id);
+
+	public List<Product> AdministratorList();
+
 
 
 

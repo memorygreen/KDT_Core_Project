@@ -95,5 +95,14 @@
 	    SELECT * FROM tb_product WHERE prod_name LIKE CONCAT('%', #{keyword}, '%')
 	    OR prod_desc LIKE CONCAT('%', #{keyword}, '%')
 	</select>
+	
+	<select id="PostContent"  parameterType="String" resultType="com.smhrd.entity.Product">
+		SELECT * FROM
+		WHERE seller_id = #{user_id}
+	</select>
+	
+	<select id="AdministratorList" parameterType="String" resultType="com.smhrd.entity.Product">
+	SELECT * FROM tb_product 
+	</select>
 	 
 </mapper>

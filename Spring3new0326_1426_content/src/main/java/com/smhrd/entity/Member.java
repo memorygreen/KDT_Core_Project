@@ -21,7 +21,7 @@ public class Member {
 	private String user_status;
 	private Date joined_at;
 	private String user_role;
-
+	private String user_nm; // 이름 추가
 //	public Member(String id, String pw, String phone) {
 //		super();
 //		this.id = id;
