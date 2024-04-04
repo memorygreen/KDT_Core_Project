@@ -43,6 +43,9 @@ public class Product {
     // 상품 사진경로 
     private String prod_img_path;
 
+    // 상품 사진 절대경로 
+    private String prod_abs_img_path;
+
     // 상품 상태 
     private String prod_status;
 	

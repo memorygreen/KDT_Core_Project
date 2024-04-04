@@ -106,7 +106,7 @@ public class ProductController {
 			
 			System.out.println("값 설정");
 			int fileMaxSize = 10 * 1024 * 10000; //파일크기
-			String savePath = request.getRealPath("/resources/img/saveimg"); //저장경로
+			String savePath = request.getRealPath("/resources/img/"); //저장경로
 			System.out.println(savePath);
 			
 			System.out.println("try catch  설정");
