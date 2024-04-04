@@ -428,7 +428,37 @@
 
 							<img class="product__details__pic__item--large"
 								src="resources/img/saveimg/${prod.prod_img_path}" alt="">
+								
+								
+								
+								
 						</div>
+						
+						
+						
+						
+						<!-- 조건  -->
+						<!--  절대 경로 조건 주는 부분  -->
+								<c:choose>
+									<c:when test="${empty prod.prod_abs_img_path }">
+										
+										<img class="product__details__pic__item--large"
+											src="resources/img/${prod.prod_img_path}" alt="">	
+											
+									</c:when>
+									<c:otherwise>
+									<img class="product__details__pic__item--large"
+											src="${prod.prod_abs_img_path}" alt="">	
+											
+									</c:otherwise>
+								</c:choose>
+						<!-- 조건 끝 -->
+						
+						
+						
+						
+						
+						
 
 						<!--메인 사진 아래 여러 장 사진
                         <div class="product__details__pic__slider owl-carousel">

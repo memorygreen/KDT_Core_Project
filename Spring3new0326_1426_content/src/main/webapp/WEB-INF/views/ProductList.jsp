@@ -114,7 +114,8 @@
 		<nav class="humberger__menu__nav mobile-menu">
 			<ul>
 				<li>
-					<!-- 로그인상태면 로그아웃이 보이게하고, 로그아웃상태면 로그인이 보이게 하기 --> <c:choose>
+					<!-- 로그인상태면 로그아웃이 보이게하고, 로그아웃상태면 로그인이 보이게 하기 --> 
+					<c:choose>
 						<c:when test="${not empty sessionScope.info}">
 							<a href="logout.do"> <svg xmlns="http://www.w3.org/2000/svg"
 									width="16" height="16" fill="currentColor" class="bi bi-lock"
@@ -441,39 +442,31 @@
 					<c:forEach items="${prod_list}" var="prod" varStatus="i" begin="0"
 						end="4">
 						<div class="col-lg-3">
-							<div class="categories__item set-bg"
-								data-setbg="resources/img/saveimg/${prod.prod_img_path}">
+						
+						
+						<!-- 조건  -->
+						<!--  절대 경로 조건 주는 부분  --> <!-- 조건문 안 div태그 안 닫아줘도 되는건지..?일단 잘 됨 -->
+								<c:choose>
+									<c:when test="${empty prod.prod_abs_img_path }">
+										<div class="categories__item set-bg"
+											data-setbg="resources/img/${prod.prod_img_path}">
+											
+									</c:when>
+									<c:otherwise>
+									<div class="categories__item set-bg"
+											data-setbg="${prod.prod_abs_img_path}">
+									</c:otherwise>
+								</c:choose>
+						<!-- 조건 끝 -->
+						
+							
 								<h5>
 									<a href="ProductContent.do?prod_idx=${prod.prod_idx}">${prod.prod_name}</a>
 								</h5>
 							</div>
 						</div>
 					</c:forEach>
-					<!-- 2-5번째 
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="resources/img/categories/가방105.jpg">
-                            <h5><a href="#">db에서 상품제목 가져와야해요2</a></h5>
-                        </div>
-                    </div>
-                    
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="resources/img/categories/가방132.jpg">
-                            <h5><a href="#">db에서 상품제목 가져와야해요3</a></h5>
-                        </div>
-                    </div>
-                    
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="resources/img/categories/가방137.jpg">
-                            <h5><a href="#">db에서 상품제목 가져와야해요4</a></h5>
-                        </div>
-                    </div>
-                    
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="resources/img/categories/가방164.jpg">
-                            <h5><a href="#">db에서 상품제목 가져와야해요5</a></h5>
-                        </div>
-                    </div>
-                    -->
+					
 
 				</div>
 			</div>
@@ -538,7 +531,34 @@
 				</tr>
 
 				</c:forEach>-->
-
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<!-- 찐 -->
 
 				<!--  상품 1개씩 반복 -->
 				<c:forEach items="${prod_list}" var="prod" varStatus="i">
@@ -549,11 +569,19 @@
 							<!-- <img src="resources/board/${prod.prod_img_path}" width=50 height=100> -->
 							<!-- 원래경로 -->
 							<!-- <div class="featured__item__pic set-bg" data-setbg="resources/img/featured/feature-1.jpg"> -->
-							<div class="featured__item__pic set-bg"
-								data-setbg="resources/img/saveimg/${prod.prod_img_path}">
-								<c:if test="${not empty prod.prod_img_path}">
-
-								</c:if>
+							
+								<!--  절대 경로 조건 주는 부분  -->
+								<c:choose>
+									<c:when test="${empty prod.prod_abs_img_path }">
+										<div class="featured__item__pic set-bg"
+											data-setbg="resources/img/${prod.prod_img_path}">
+									</c:when>
+									<c:otherwise>
+										<div class="featured__item__pic set-bg"
+										data-setbg="${prod.prod_abs_img_path}">
+									</c:otherwise>
+								</c:choose>
+								
 								</td>
 
 
@@ -707,7 +735,7 @@
             </div>
              상품2~8번 주석처리 -->
 				<!--상품목록 끝-->
-
+			
 
 
 			</div>
@@ -752,7 +780,19 @@
 									end="2" varStatus="i">
 									<a href="#" class="latest-product__item">
 										<div class="latest-product__item__pic">
-											<img src="img/latest-product/lp-1.jpg" alt="">
+											<!-- 조건  -->
+											<!--  절대 경로 조건 주는 부분  --> <!-- 조건문 안 div태그 안 닫아줘도 되는건지..?일단 잘 됨 -->
+													<c:choose>
+														<c:when test="${empty prod_views.prod_abs_img_path }">
+															<img src="resources/img/${prod_views.prod_img_path}" alt="">	
+														</c:when>
+														<c:otherwise>
+															<img src="${prod_views.prod_abs_img_path}" alt="">	
+														</c:otherwise>
+													</c:choose>
+											<!-- 조건 끝 -->
+											
+											
 										</div>
 										<div class="latest-product__item__text">
 											<h6>
@@ -770,7 +810,17 @@
 									end="5" varStatus="i">
 									<a href="#" class="latest-product__item">
 										<div class="latest-product__item__pic">
-											<img src="img/latest-product/lp-1.jpg" alt="">
+											<!-- 조건  -->
+											<!--  절대 경로 조건 주는 부분  --> <!-- 조건문 안 div태그 안 닫아줘도 되는건지..?일단 잘 됨 -->
+													<c:choose>
+														<c:when test="${empty prod_views.prod_abs_img_path }">
+															<img src="resources/img/${prod_views.prod_img_path}" alt="">	
+														</c:when>
+														<c:otherwise>
+															<img src="${prod_views.prod_abs_img_path}" alt="">	
+														</c:otherwise>
+													</c:choose>
+											<!-- 조건 끝 -->
 										</div>
 										<div class="latest-product__item__text">
 											<h6>
@@ -798,7 +848,17 @@
 									<!-- 1~3번째 (0번 ~2번 인덱스)반복 -->
 									<a href="#" class="latest-product__item">
 										<div class="latest-product__item__pic">
-											<img src="img/latest-product/lp-1.jpg" alt="">
+											<!-- 조건  -->
+											<!--  절대 경로 조건 주는 부분  --> <!-- 조건문 안 div태그 안 닫아줘도 되는건지..?일단 잘 됨 -->
+													<c:choose>
+														<c:when test="${empty prod_lowest.prod_abs_img_path }">
+															<img src="resources/img/${prod_lowest.prod_img_path}" alt="">	
+														</c:when>
+														<c:otherwise>
+															<img src="${prod_lowest.prod_abs_img_path}" alt="">	
+														</c:otherwise>
+													</c:choose>
+											<!-- 조건 끝 -->
 										</div>
 										<div class="latest-product__item__text">
 											<h6>
@@ -818,15 +878,25 @@
 									<!-- 4~6번째 (3번 ~5번 인덱스)반복 -->
 									<a href="#" class="latest-product__item">
 										<div class="latest-product__item__pic">
-											<img src="img/latest-product/lp-1.jpg" alt="">
+											<!-- 조건  -->
+											<!--  절대 경로 조건 주는 부분  --> <!-- 조건문 안 div태그 안 닫아줘도 되는건지..?일단 잘 됨 -->
+													<c:choose>
+														<c:when test="${empty prod_lowest.prod_abs_img_path }">
+															<img src="resources/img/${prod_lowest.prod_img_path}" alt="">	
+														</c:when>
+														<c:otherwise>
+															<img src="${prod_lowest.prod_abs_img_path}" alt="">	
+														</c:otherwise>
+													</c:choose>
+											<!-- 조건 끝 -->
 										</div>
+										
+										
 										<div class="latest-product__item__text">
 											<h6>
 												<a href="ProductContent.do?prod_idx=${prod_lowest.prod_idx}">${prod_lowest.prod_name}</a>
-											</h6>
-											<!-- 첫번째 상품 제목 -->
-											<span>${prod_lowest.prod_price}</span>
-											<!-- 첫번째 상품 가격 -->
+											</h6><!-- 상품 제목 -->
+											<span>${prod_lowest.prod_price}</span><!-- 첫번째 상품 가격 -->
 										</div>
 									</a>
 								</c:forEach>
@@ -848,7 +918,17 @@
 									<!-- 4~6번째 (3번 ~5번 인덱스)반복 -->
 									<a href="#" class="latest-product__item">
 										<div class="latest-product__item__pic">
-											<img src="img/latest-product/lp-1.jpg" alt="">
+											<!-- 조건  -->
+											<!--  절대 경로 조건 주는 부분  --> <!-- 조건문 안 div태그 안 닫아줘도 되는건지..?일단 잘 됨 -->
+													<c:choose>
+														<c:when test="${empty prod_reply.prod_abs_img_path }">
+															<img src="resources/img/${prod_reply.prod_img_path}" alt="">	
+														</c:when>
+														<c:otherwise>
+															<img src="${prod_reply.prod_abs_img_path}" alt="">	
+														</c:otherwise>
+													</c:choose>
+											<!-- 조건 끝 -->
 										</div>
 										<div class="latest-product__item__text">
 											<h6>
@@ -869,7 +949,17 @@
 									<!-- 4~6번째 (3번 ~5번 인덱스)반복 -->
 									<a href="#" class="latest-product__item">
 										<div class="latest-product__item__pic">
-											<img src="img/latest-product/lp-1.jpg" alt="">
+										<!-- 조건  -->
+											<!--  절대 경로 조건 주는 부분  --> <!-- 조건문 안 div태그 안 닫아줘도 되는건지..?일단 잘 됨 -->
+													<c:choose>
+														<c:when test="${empty prod_reply.prod_abs_img_path }">
+															<img src="resources/img/${prod_reply.prod_img_path}" alt="">	
+														</c:when>
+														<c:otherwise>
+															<img src="${prod_reply.prod_abs_img_path}" alt="">	
+														</c:otherwise>
+													</c:choose>
+											<!-- 조건 끝 -->
 										</div>
 										<div class="latest-product__item__text">
 											<h6>
