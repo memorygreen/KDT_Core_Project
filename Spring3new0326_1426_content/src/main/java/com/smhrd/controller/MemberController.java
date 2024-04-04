@@ -17,14 +17,17 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.smhrd.entity.Member;
+import com.smhrd.entity.Product;
 import com.smhrd.mapper.MemberMapper;
+import com.smhrd.mapper.ProductMapper;
 
 @Controller
 public class MemberController {
 
 	@Autowired
 	private MemberMapper mapper;
-
+	@Autowired
+    private ProductMapper productService;
 //		@Autowired
 //		private PasswordEncoder pwEnc;
 
@@ -168,15 +171,7 @@ public class MemberController {
 		return "myPage";
 	}
 	
-	// 관리자 페이지
-		@RequestMapping("/AdministratorList.do")
-		public String AdministratorList(Model model) {
-			System.out.println("관리자 페이지");
-		List<Member> list = mapper.AdministratorList();
-			model.addAttribute("list",list);
-			
-			return"AdministratorList";
-		}
+
 		
 		// 지훈 : 회원 전체 조회하기
 				@RequestMapping("/UserInformation.do")
@@ -205,12 +200,17 @@ public class MemberController {
 							mapper.userInfoChange(vo);
 							return "redirect:/UserContent.do?user_id=" + vo.getUser_id();
 				}
-				// 지훈 : 회원 정보 수정 페이지
-						@RequestMapping("/PostContent.do")
-						public String PostContent(@RequestParam("user_id") String user_id, Model model) {
-							System.out.println("회원 수정 페이지");
-							Member vo =mapper.PostContent(user_id);
-							model.addAttribute("vo",vo);
-							return "PostContent";
-				}
+						// 회원정보 ,상품정보 보는 기능
+						@RequestMapping("/AdministratorList.do")
+						public String administratorList(Model model) {
+						    
+						    List<Member> vo = mapper.AdministratorList();
+						    List<Product> list = productService.AdministratorList(); 
+
+						  
+						    model.addAttribute("vo", vo);
+						    model.addAttribute("list", list);
+
+						    return "AdministratorList";
+						}
 }

@@ -315,6 +315,19 @@ public class ProductController {
 					    return "searchResult"; // productList.jsp로 이동
 					}
 	
-	
+					@RequestMapping("/PostContent.do")
+					public List<Product> postContent(Model model, HttpSession session, @RequestParam("user_id") String user_id) {
+					    System.out.println("회원게시글 목록으로 이동");
+					    
+					    Member loginUser = (Member) session.getAttribute("info");//로그인한 회원의 정보를 세션에서 가져와서 loginUser라는 변수에 넣기
+						String seller_id = loginUser.getUser_id(); //reply_writer_id에 로그인한 회원(loginUser)의 아이디 넣기
+						System.out.println(seller_id);
+						
+						List<Product> PostContent = mapper.PostContent(seller_id);
+						System.out.println(PostContent.size());
+						model.addAttribute("PostContent", PostContent); //request
+						
+						return PostContent;
+					}
 	
 }
