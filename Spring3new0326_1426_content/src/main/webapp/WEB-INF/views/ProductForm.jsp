@@ -524,7 +524,6 @@
 	<div class="panel panel-default">
 		<div class="container">
 			<!-- 자영 생성(240325) -->
-			<h2 style="font-size: xx-large;">ProductForm - 상품등록 작성 화면</h2>
 			<div class="panel panel-default">
 				<div class="panel-heading"
 					style="color: #333333; background-color: #F5f5f5; padding: 10px 15px;">내
@@ -533,6 +532,8 @@
 
 					<form action="ProductInsert.do" method="post"
 						enctype="multipart/form-data">
+						<input type="hidden" name="user_sc_nm" value=${session.info.user_sc_nm}> <!-- 굳이 넘길 필요가 있나? -->
+						
 						<table class="table">
 							<tbody>
 								<tr>
@@ -566,9 +567,10 @@
 
 								<tr>
 									<td colspan="2" align="center">
-										<button type="reset" class="btn btn-danger">글작성 취소</button>
-										<button type="submit" class="btn btn-warning">글작성 완료</button>
-
+										
+										<a href="ProductList.do" class="btn btn-danger" style="background-color: #d0d6cf; color: #333;">글작성 취소 (메인화면으로)</a>
+										<button type="submit" class="btn btn-warning" style="background-color: #44bd32; color: white;">글작성 완료</button>
+										
 									</td>
 								</tr>
 							</tbody>

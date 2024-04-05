@@ -98,7 +98,7 @@ public class ProductController {
 		System.out.println("값 설정");
 		int fileMaxSize = 10 * 1024 * 10000; // 파일크기
 		// String savePath = request.getRealPath("/resources/img/saveimg"); //저장경로
-		String savePath = request.getRealPath("/resources/board"); // 자영 : 2024.04.03. 20:08 강의듣고 다시
+		String savePath = request.getRealPath("/resources/img"); // 자영 : 2024.04.03. 20:08 강의듣고 다시
 		System.out.println(savePath);
 
 		System.out.println("try catch  설정");
@@ -111,6 +111,7 @@ public class ProductController {
 		}
 
 		System.out.println("multi에 있는 값들 가져오기");
+		
 		String prod_name = multi.getParameter("prod_name");
 		String prod_desc = multi.getParameter("prod_desc");
 		String prod_img_path = multi.getFilesystemName("prod_img_path");
@@ -351,13 +352,16 @@ public class ProductController {
 				"cum", "fag", "fuc", "gfy", "jap", "jiz", "jiz", "pee", "s0b", "sex", "t1t", "tit", "vag", "wad", "wog",
 				"wop", "wtf", "yid" }; // 욕설 내용 확인 필요
 
+		
+		String user_sc_nm =  loginUser.getUser_sc_nm();
 		System.out.println("product dto에 multi에 있는 값 넣어주기");
 		prod.setProd_name(prod_name);
 		prod.setProd_desc(prod_desc);
 		prod.setProd_img_path(prod_img_path);
 		prod.setProd_price(prod_price_num); // 자영(0325):가격은 정수니까 문자열->정수 형변환
 		prod.setSeller_id(seller_id); // 로그인한 회원(loginUser)의 id를 product(DTO)의seller_id에 넣기
-
+		prod.setProd_sc_nm(user_sc_nm);
+		
 		System.out.println(prod.toString());// test용
 
 		System.out.println("욕설 포함 확인 조건문");

@@ -56,40 +56,9 @@
 <link rel="stylesheet" href="resources/css/style.css" type="text/css">
 
 
-
+<!--  카카오 app키 불러오기 -->
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=724fae357dc77c6df9a18c9fc030d033"></script>
-
-<style>
-#blank_space {
-	height: 20%;
-	width: 100%;
-}
-
-#schoolInfo {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	width: auto;
-	margin: 0 auto;
-}
-
-.nice-select {
-	display: inline-block;
-	float: none;
-	padding-bottom: 10px;
-	padding-top: 2px;
-}
-
-.site-btn {
-	margin-top: 10px;
-}
-
-#footerBeginSpace {
-	width: auto;
-	height: 20%;
-}
-</style>
 
 </head>
 <body>
@@ -97,6 +66,8 @@
 	<div id="preloder">
 		<div class="loader"></div>
 	</div>
+
+<!------------------------------------  회색 고정 최상단 부분 -------------------------------------------->
 
 	<!--반응형 메뉴바 -->
 	<!-- Humberger Begin -->
@@ -314,6 +285,13 @@
 				</div>
 			</div>
 		</div>
+		
+		<!--------------------------------------  회색 고정 최상단 부분 끝 ----------------------------------------->
+		
+		
+		
+		<!-- -----------------------------------로고 시작------------------------------------------- --> 
+		
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-3"></div>
@@ -323,7 +301,7 @@
 						<a href="ProductList.do"><img
 							src="resources/img/중고스쿨초록색로고누끼완.png" alt="경로를 다시 입력해주세요"></a>
 					</div>
-
+<!-- -----------------------------------------로고 끝 ---------------------------------------------------->
 					<!--상단 네비게이션바 삭제
                     <nav class="header__menu">
                         <ul>
@@ -381,12 +359,41 @@
 		</div>
 	</header>
 	<!-- Header Section End -->
-
+<!-- ---------------------------학교 정보 시작-------------------------------- -->
+<!--  학교 정보 스타일 적용 -->
 
 
 	<div id="blank_space"></div>
 
 	<style>
+	#blank_space {
+	height: 20%;
+	width: 100%;
+}
+
+#schoolInfo {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: auto;
+	margin: 0 auto;
+}
+
+.nice-select {
+	display: inline-block;
+	float: none;
+	padding-bottom: 10px;
+	padding-top: 2px;
+}
+
+.site-btn {
+	margin-top: 10px;
+}
+
+#footerBeginSpace {
+	width: auto;
+	height: 20%;
+}
 #blank_space {
 	height: 20%;
 	width: 100%;
@@ -467,6 +474,7 @@
 }
 </style>
 
+<!-- 학교정보 입력 부분 -->
 	<div class="contact__form__title">
 		<h2>학교정보 업로드</h2>
 	</div>
@@ -502,6 +510,8 @@
 		</div>
 		<div id="btn_space"></div>
 		<button id="uploadBtn" type="submit" class="site-btn">제출</button>
+		
+		<!--  학교정보 js 이벤트 -->
 		<script>
 			window.onload = function() {
 
@@ -515,8 +525,9 @@
 							schoolList.append($('<option>', {
 								value : "",
 								text : "학교를 선택하세요"
-							})); // jQuery로 새로운 옵션 추가
-
+							})); 
+							
+							// 중학교 선택시 중학교들 옵션 생성
 							if (e.target.value === "middle") {
 								arrType.middle.forEach(function(school) {
 									schoolList.append($('<option>', {
@@ -524,6 +535,7 @@
 										text : school.name
 									}));
 								});
+								// 고등학교 선택 시 고등학교들 옵션 생성
 							} else if (e.target.value === "high") {
 								arrType.high.forEach(function(school) {
 									schoolList.append($('<option>', {
@@ -533,7 +545,8 @@
 								});
 							}
 						});
-
+				
+				// 학교목록들
 				function getSchoolList() {
 					var obj = {
 						middle : [ {
@@ -561,7 +574,9 @@
 						obj : obj
 					};
 				}
-
+				
+				// 카카오 지도
+				
 				latitude = 33.450701
 				longitude = 126.570667
 
@@ -730,7 +745,11 @@
 
 
 	</form>
-
+<!-- --------------------------------학교정보 끝 --------------------------------------------->
+	
+	
+	
+	
 	<!-- 문의하기 부분 삭제-->
 	<!--
     <!-- Contact Form Begin 
@@ -760,7 +779,9 @@
         </div>
     </div>
     <!-- Contact Form End -->
-	-->
+	
+	
+	<!----------------------------- 마지막 하단 반복되는 부분 --------------------------------------------->
 
 	<div id="footerBeginSpace"></div>
 
@@ -875,7 +896,7 @@
 			</div>
 	</footer>
 	<!-- Footer Section End -->
-
+<!----------------------------- 마지막 하단 반복되는 부분 끝 --------------------------------------------->
 
 	<!-- Js Plugins -->
 	<script src="/controller/resources/js/jquery-3.3.1.min.js"></script>

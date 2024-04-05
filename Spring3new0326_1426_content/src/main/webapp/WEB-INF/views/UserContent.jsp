@@ -159,7 +159,8 @@
 									<th style="width: 120px">학생증</th>
 									<td><c:choose>
 											<c:when test="${not empty vo.user_sc_img}">
-												<img src="${vo.user_sc_img}" alt="학생증 사진" width="250px">
+											
+												<img src="resources/img/${vo.user_sc_img}" alt="학생증 사진" width="250px">
 											</c:when>
 											<c:otherwise>
 												<p>등록된 사진이 없습니다</p>

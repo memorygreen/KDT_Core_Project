@@ -34,8 +34,8 @@
 	
 	<!-- 상품 등록 -->
 	<insert id="ProductInsert" parameterType="com.smhrd.entity.Product"><!-- 판매완료날짜 뺌 -->
-		INSERT INTO tb_product (prod_name, prod_desc, prod_price, seller_id,  prod_img_path) 
-		VALUES ( #{prod_name} , #{prod_desc}, #{prod_price}, #{seller_id}, #{prod_img_path})
+		INSERT INTO tb_product (prod_name, prod_desc, prod_price, seller_id,  prod_img_path, prod_sc_nm) 
+		VALUES ( #{prod_name} , #{prod_desc}, #{prod_price}, #{seller_id}, #{prod_img_path}, #{prod_sc_nm})
 	</insert>
 	
 	
