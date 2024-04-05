@@ -66,13 +66,7 @@ input:focus {
     letter-spacing: .1em;
 }
 
-a {
-    text-decoration: none;
-    color: rgb(255, 255, 255);
-    font-family: sans-serif;
-    letter-spacing: .1em;
-    
-}
+
 
 .line{
     width: 80%; 

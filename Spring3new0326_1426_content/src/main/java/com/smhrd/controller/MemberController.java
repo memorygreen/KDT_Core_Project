@@ -27,7 +27,7 @@ public class MemberController {
 	@Autowired
 	private MemberMapper mapper;
 	@Autowired
-    private ProductMapper productService;
+	private ProductMapper productService;
 //		@Autowired
 //		private PasswordEncoder pwEnc;
 
@@ -140,7 +140,7 @@ public class MemberController {
 		MultipartRequest multi = null;
 
 		int fileMaxSize = 10 * 1024 * 10000;
-		String savePath =  request.getRealPath("resources/ID");
+		String savePath = request.getRealPath("resources/ID");
 		System.out.println(savePath);
 
 		try {
@@ -170,47 +170,76 @@ public class MemberController {
 
 		return "myPage";
 	}
+
+	// 지훈 : 회원 전체 조회하기
+	@RequestMapping("/UserInformation.do")
+	public String UserInformation(Model model) {
+		System.out.println("회원조회 페이지");
+		List<Member> list = mapper.UserInformation();
+		model.addAttribute("list", list);
+
+		return "UserInformation";
+	}
+
+	// 지훈 : 회원정보 수정하는 페이지로 이동
+	@RequestMapping("/UserContent.do")
+	public String UserContent(@RequestParam("user_id") String user_id, Model model) {
+		System.out.println("회원 수정 페이지");
+		Member vo = mapper.UserContent(user_id);
+		model.addAttribute("vo", vo);
+		return "UserContent";
+	}
+
+	// 지훈 : 회원 정보 수정하는 기능!!
+	@RequestMapping("/userInfoChange.do")
+	public String userInfoChange(Member vo) {
+		System.out.println("회원 수정 버튼 클릭");
+		mapper.userInfoChange(vo);
+		return "redirect:/UserContent.do?user_id=" + vo.getUser_id();
+	}
+
+	// 회원정보 ,상품정보 보는 기능
+	@RequestMapping("/AdministratorList.do")
+	public String administratorList(Model model) {
+
+		List<Member> vo = mapper.AdministratorList();
+		List<Product> list = productService.AdministratorList();
+
+		model.addAttribute("vo", vo);
+		model.addAttribute("list", list);
+
+		return "AdministratorList";
+	}
 	
-
-		
-		// 지훈 : 회원 전체 조회하기
-				@RequestMapping("/UserInformation.do")
-					public String UserInformation(Model model) {
-						System.out.println("회원조회 페이지");
-						List<Member> list = mapper.UserInformation();
-						model.addAttribute("list",list);
-							
-							return"UserInformation";
-						}
-				
-				// 지훈 : 회원정보 수정하는 페이지로 이동
-				@RequestMapping("/UserContent.do")
-				public String UserContent(@RequestParam("user_id") String user_id, Model model) {
-					System.out.println("회원 수정 페이지");
-					Member vo =mapper.UserContent(user_id);
-					model.addAttribute("vo",vo);
-					return "UserContent";
-				}
-				
-				
-				// 지훈 : 회원 정보 수정하는 기능!!
-						@RequestMapping("/userInfoChange.do")
-						public String userInfoChange(Member vo) {
-							System.out.println("회원 수정 버튼 클릭");		
-							mapper.userInfoChange(vo);
-							return "redirect:/UserContent.do?user_id=" + vo.getUser_id();
-				}
-						// 회원정보 ,상품정보 보는 기능
-						@RequestMapping("/AdministratorList.do")
-						public String administratorList(Model model) {
-						    
-						    List<Member> vo = mapper.AdministratorList();
-						    List<Product> list = productService.AdministratorList(); 
-
-						  
-						    model.addAttribute("vo", vo);
-						    model.addAttribute("list", list);
-
-						    return "AdministratorList";
-						}
+	
+	
+	
+	//회원탈퇴 폼으로 이동(자영)
+    @RequestMapping("/goMemberOutForm.do")
+    public String goMemberOutForm(@RequestParam("user_id") String user_id) {
+       System.out.println("회원탈퇴 창으로 이동 ");
+       // 민감정보 post로 받자!!!! 
+       return "memberOutForm"; //회원 탈퇴창 이름을 반환
+    }
+    
+    //회원탈퇴 기능(자영)
+    @RequestMapping("/memberOut.do")
+    public String memberOut(HttpSession session) {
+       System.out.println("회원탈퇴 기능");
+       Member loginUser = (Member) session.getAttribute("info"); //session에서 로그인한 회원의 정보를 loginUser 라는 Member 데이터타입 변수 loginUser에 넣기
+       String user_id = loginUser.getUser_id();  //user_id 라는 변수에 세션에 담긴 로그인한 회원의 id 가져오기
+       mapper.memberOut(user_id); //세션에 저장된 user_id 를 매개변수로 업데이트문(회원상태 '탈퇴'로 변경하는 update문 호출)
+       System.out.println(user_id + "님 회원상태 탈퇴로 변경 완료!!");
+       session.invalidate(); //세션 종료하여 로그아웃
+       
+       // 민감정보 post로 받자!!!! 
+       return "redirect:/ProductList.do"; //회원 탈퇴창 이름을 반환
+    }
+	
+	
+	
+	
+	
+	
+	
 }

@@ -29,7 +29,7 @@ public interface MemberMapper {
 	public List<Member> AdministratorList();
 
 	
-
+	public void memberOut(String user_id);
 	
 
 }
