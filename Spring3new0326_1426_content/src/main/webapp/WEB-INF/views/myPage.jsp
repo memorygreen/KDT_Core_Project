@@ -103,12 +103,6 @@
     	<input type="hidden" name="user_id" value="${sessionScope.info.user_id}"> <!-- 자영 : 임시로 넣음 지원씨한테 id값 넘겨야하는지 물어봐야함 -->
 		<button type="submit" class="btn" style="background-color: #44bd32; color: white; font-weight: bold;">학교인증 페이지로 이동(임시)</button>
     </form>
-	
-
-
-
-
-
 
 </body>
 </html>
