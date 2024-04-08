@@ -54,7 +54,7 @@
 		<div class="loader"></div>
 	</div>
 
-
+<!------------------------------------  회색 고정 최상단 부분 -------------------------------------------->
 
 	<!--반응형 메뉴바 -->
 	<!-- Humberger Begin -->
@@ -98,14 +98,15 @@
 			<ul>
 				<li>
 					<!-- 로그인상태면 로그아웃이 보이게하고, 로그아웃상태면 로그인이 보이게 하기 --> <c:choose>
+						<!-- 
 						<c:when test="${not empty sessionScope.info}">
 							<a href="logout.do"> <svg xmlns="http://www.w3.org/2000/svg"
 									width="16" height="16" fill="currentColor" class="bi bi-lock"
 									viewBox="0 0 16 16">
 		                        <path
 										d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2m3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2M5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1" />
-		                    </svg> 로그아웃 <!--로그인 중이면 로그아웃으로 변하게 하는 기능 필요-->
-							</a>
+		                    </svg> 로그아웃 --> <!--로그인 중이면 로그아웃으로 변하게 하는 기능 필요-->
+							<!--  </a>
 						</c:when>
 						<c:otherwise>
 							<a href="goLogin.do"> <svg xmlns="http://www.w3.org/2000/svg"
@@ -113,14 +114,14 @@
 									viewBox="0 0 16 16">
 							   <path
 										d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2M3 8a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1z" />
-							</svg> 로그인 <!--로그인 중이면 로그아웃으로 변하게 하는 기능 필요-->
-							</a>
+							</svg> 로그인--> <!--로그인 중이면 로그아웃으로 변하게 하는 기능 필요-->
+							<!--  </a>
 						</c:otherwise>
 					</c:choose>
-				</li>
-
-				<li><c:if test="${not empty sessionScope.info}">
-						<a href="myPage.do"> <!-- 마이페이지로 이동하게 변경 필요 --> <svg
+				</li>-->
+				
+				<li><c:if test="${not empty sessionScope.info}">  
+						  <a href="myPage.do"> <!-- 마이페이지로 이동하게 변경 필요 -->   <svg
 								xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 								fill="currentColor" class="bi bi-file-earmark-person"
 								viewBox="0 0 16 16">
@@ -198,17 +199,23 @@
 
 					</div>
 
-					<!-- 최상단 고정 메뉴바 우측  -->
+					<!-- 최상단 고정 메뉴바 우측 
+				
 					<div class="col-lg-6 col-md-6">
 						<div class="header__top__right">
-
+							<c:if test="${not empty sessionScope.info}">
+								<div class="header__top__right__social">
+									<span fonr-size="20px">${sessionScope.info.user_id}님
+										환영합니다</span>
+								</div>
+							</c:if>
 							<div class="header__top__right__social">
 								<!--  
                                 <a href="#"><i class="fa fa-facebook"></i></a>
                                 <a href="#"><i class="fa fa-twitter"></i></a>
                                 <a href="#"><i class="fa fa-linkedin"></i></a>-->
 
-								<!-- 다크모드 -->
+								<!-- 다크모드 
 								<a href="#"> <svg xmlns="http://www.w3.org/2000/svg"
 										width="16" height="16" fill="currentColor"
 										class="bi bi-brightness-high" viewBox="0 0 16 16">
@@ -216,14 +223,14 @@
 											d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708" />
                                       </svg>다크모드
 								</a>
-							</div>
+							</div>-->
 
-							<!-- 로그인 했을 때에만 마이페이지 보이게 하기  -->
+							<!-- 로그인 했을 때에만 마이페이지 보이게 하기  
 							<c:if test="${not empty sessionScope.info}">
 								<div class="header__top__right__language">
 									<!-- 마이페이지 -->
 									<!-- 로그인 전이면 안 보이게 하는 조건문 추가 필요 -->
-									<a href="myPage.do"> <svg
+									<!--  <a href="myPage.do"> <svg
 											xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 											fill="currentColor" class="bi bi-house-fill"
 											viewBox="0 0 16 16">
@@ -232,7 +239,7 @@
 		  										<path
 												d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z" />
 											</svg> 마이페이지
-									</a>
+									</a>-->
 
 									<!--언어선택 리스트 주석처리
 	                                <img src="img/language.png" alt="">
@@ -244,11 +251,12 @@
 	                                    <li><a href="#">English</a></li>
 	                                </ul>-->
 
-								</div>
+								<!-- </div>
 
-							</c:if>
+							</c:if> -->
 							<!-- 로그인 상태면 로그아웃으로 보이게, 로그아웃상태면 로그인으로 보이게 -->
-							<c:choose>
+							<!-- 
+							 <c:choose>
 								<c:when test="${not empty sessionScope.info}">
 									<div class="header__top__right__auth">
 										<a href="logout.do"><i class="fa fa-user"></i>로그아웃</a>
@@ -266,12 +274,19 @@
 
 						</div>
 					</div>
-					<!-- 최상단 고정 메뉴바 우측 끝 -->
+					 최상단 고정 메뉴바 우측 끝 -->
 
 
 				</div>
 			</div>
 		</div>
+		
+		<!--------------------------------------  회색 고정 최상단 부분 끝 ----------------------------------------->
+		
+		
+		<!-- -----------------------------------로고 시작------------------------------------------- --> 
+		
+		
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-3"></div>
@@ -281,7 +296,7 @@
 						<a href="ProductList.do"><img
 							src="resources/img/중고스쿨초록색로고누끼완.png" alt="경로를 다시 입력해주세요"></a>
 					</div>
-
+<!-- -----------------------------------------로고 끝 ---------------------------------------------------->
 					<!--상단 네비게이션바 삭제
                     <nav class="header__menu">
                         <ul>
@@ -342,6 +357,9 @@
 
 	<!--<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"> -->
 	
+	<!-- ----------------------------------로그인 시작 부분 ------------------------------->
+	
+	<!--  로그인 style 적용 -->
 	<style>
 	
 	.login_input{
@@ -479,6 +497,9 @@ a {
 
 
 	</style>
+	
+	
+	<!-- 로그인 입력부분 -->
 	<div class="myform">
 
 		<form action="login.do" method="post">
@@ -486,6 +507,7 @@ a {
 			<input class="login_input"
 				type="password" name="user_pw" class="form-control" placeholder="&#xf003;   비밀번호" />
 			<button id="login_btn" type="submit">로그인</button>
+			<!-- 카카오 로그인 버튼 -->
 			<div id="kakao_btn_space">
 				<a href="javascript:kakaoLogin()"><img
 		src="${pageContext.request.contextPath}/resources/board/kakao_login_medium_wide.png"></a>
@@ -497,6 +519,7 @@ a {
 		</form>
 	</div>
 	
+	<!-- 카카오 api  -->
 	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 	<script>
 		window.Kakao.init("724fae357dc77c6df9a18c9fc030d033")
@@ -520,7 +543,10 @@ a {
 		  }
 		
 	</script>
-
+<!-- -------------------------------------------- -로그인 끝 -------------------------------->
+	
+	
+	<!----------------------------- 마지막 하단 반복되는 부분 --------------------------------------------->
 	<!-- Footer Section Begin -->
 	<footer class="footer spad">
 		<div class="container">
@@ -633,6 +659,7 @@ a {
 	</footer>
 	<!-- Footer Section End -->
 
+<!----------------------------- 마지막 하단 반복되는 부분 끝 --------------------------------------------->
 
 	<!-- Js Plugins -->
 	<script src="login.js"></script>

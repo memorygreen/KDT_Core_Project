@@ -31,6 +31,7 @@ public class MemberController {
 //		@Autowired
 //		private PasswordEncoder pwEnc;
 
+	// 회원가입 기능
 	@RequestMapping("/join.do")
 	public String join(Member vo) {
 
@@ -73,16 +74,20 @@ public class MemberController {
 
 	}
 
+	// 회원가입 화면으로 이동
 	@RequestMapping("/goJoin.do")
 	public String goJoin() {
 		return "join";
 	}
 
+	// 로그인 화면으로 이동
 	@RequestMapping("/goLogin.do")
 	public String goLogin() {
 		return "login";
 	}
 
+	
+	// 아이디 중복 체크 기능
 	@RequestMapping("/findDuplicate.do")
 	public @ResponseBody Member findDuplicate(@RequestParam("user_id") String user_id) {
 		System.out.println("아이디 체크" + user_id);
@@ -94,6 +99,7 @@ public class MemberController {
 		return info;
 	}
 
+	// 회원 로그인 기능
 	@RequestMapping("/login.do")
 	public String login(Member vo, HttpSession session) {
 
@@ -129,18 +135,20 @@ public class MemberController {
 		return "myPage";
 	}
 
+	// 학교 인증창 이동 기능
 	@RequestMapping("/goSchoolCheck.do")
 	public String goSchoolCheck() {
 		return "SchoolCheck";
 	}
 
+	// 학교정보, 학생증 사진 업데이트 기능
 	@RequestMapping("/UpdateSchoolInfo.do")
 	public String InsertSchoolInfo(HttpServletRequest request, HttpSession session) {
 
 		MultipartRequest multi = null;
 
 		int fileMaxSize = 10 * 1024 * 10000;
-		String savePath = request.getRealPath("resources/ID");
+		String savePath = request.getRealPath("resources/img");
 		System.out.println(savePath);
 
 		try {

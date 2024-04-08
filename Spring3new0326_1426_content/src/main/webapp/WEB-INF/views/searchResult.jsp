@@ -274,13 +274,7 @@
 						<h2>상품 목록</h2>
 						</br> </br> </br>
 						<!-- 로그인한 회원에게만 상품등록 버튼이 보이게 하기 -->
-						<c:if test="${not empty sessionScope.info}">
-							<form action="ProductForm.do">
-								<button type="submit" class="btn"
-									style="background-color: #44bd32; color: white; font-weight: bold;">상품등록
-									버튼(임시)</button>
-							</form>
-						</c:if>
+						
 						</br>
 					</div>
 					<div class="featured__controls"></div>
@@ -296,10 +290,29 @@
 							<!-- <img src="resources/board/${prod.prod_img_path}" width=50 height=100> -->
 							<!-- 원래경로 -->
 							<!-- <div class="featured__item__pic set-bg" data-setbg="resources/img/featured/feature-1.jpg"> -->
+							
+							<!--  복붙 메인-->
+							<!-- 조건  -->
+						<!--  절대 경로 조건 주는 부분  --> 
+						<!-- 조건문 안 div태그 안 닫아줘도 되는건지..?일단 잘 됨 -->
+								<c:choose>
+									<c:when test="${empty prod.prod_abs_img_path}">
+										<div class="featured__item__pic set-bg"
+											data-setbg="resources/img/${prod.prod_img_path}">
+											
+									</c:when>
+									<c:otherwise>
+									<div class="featured__item__pic set-bg"
+											data-setbg="${prod.prod_abs_img_path}">
+									</c:otherwise>
+								</c:choose>
+						<!-- 조건 끝 -->
+							<!--  복붙 끝 -->
+							
+							<!-- 원래
 							<div class="featured__item__pic set-bg"
-								data-setbg="resources/img/saveimg/${prod.prod_img_path}">
-								<c:if test="${not empty prod.prod_img_path}">
-								</c:if>
+								data-setbg="resources/img/${prod.prod_img_path}">
+								 -->
 								</td>
 								<!-- 찜하기, 리트윗, 쇼핑카드  -->
 								<ul class="featured__item__pic__hover">
@@ -308,6 +321,19 @@
 									<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
 								</ul>
 							</div>
+							
+							<!-- 원래 끝 -->
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
 							<!-- 상품 사진 아래 정보 나오는 부분 div -->
 							<div class="featured__item__text">
 								<h6

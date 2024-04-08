@@ -13,6 +13,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+<!-- 영표쌤이 추가해주심(240329 10:55 팀별 피드백) -->
 <style>
 @font-face {
 	font-family: 'Pretendard-Regular';
@@ -61,7 +62,7 @@
         <div class="loader"></div>
     </div>
 	
-	
+	<!------------------------------------  회색 고정 최상단 부분 -------------------------------------------->
 	
 	<!--반응형 메뉴바 -->
      <!-- Humberger Begin -->
@@ -267,6 +268,15 @@
                 </div>
             </div>
         </div>
+        
+        <!--------------------------------------  회색 고정 최상단 부분 끝 ----------------------------------------->
+      
+      
+      
+      
+        
+       <!-- -----------------------------------로고 시작------------------------------------------- --> 
+        
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">
@@ -277,7 +287,7 @@
                     <div class="header__logo">
                         <a href="ProductList.do"><img src="resources/img/중고스쿨초록색로고누끼완.png" alt="경로를 다시 입력해주세요"></a>
                     </div>
-
+ <!-- -----------------------------------------로고 끝 ---------------------------------------------------->
                     <!--상단 네비게이션바 삭제
                     <nav class="header__menu">
                         <ul>
@@ -364,7 +374,8 @@
                     </div>-->
 				</div>
 
-				<!-- 검색창 -->
+<!------------------------------ 검색창 시작------------------------------------------------->
+
 				<div class="col-lg-9">
 					<div class="hero__search">
 						<div class="hero__search__form">
@@ -391,7 +402,9 @@
                         -->
 					</div>
 				</div>
-				<!-- 검색창 끝나는 부분-->
+				
+				
+<!------------------------------------------- 검색창 끝--------------------------------------------------->
 			</div>
 		</div>
 	</section>
@@ -415,8 +428,8 @@
     </section-->
 	>
 	<!-- Breadcrumb Section End -->
-
-
+<!-- -----------------------------------------회원가입 시작 부분----------------------------------------------->
+<!-- 회원가입 style 적용 -->
 <style>
 button {
 	background-color: green;
@@ -480,6 +493,7 @@ button {
 </style>
 
 
+<!-- 회원가입 입력부분 -->
 	<!-- Checkout Section Begin -->
 	<section class="checkout spad">
 		<div class="container">
@@ -581,6 +595,7 @@ button {
 </div>
 </section>
 
+<!--    회원가입 js 이벤트들 -->
 <script type="text/javascript">
 
 		window.onload = function() {
@@ -588,7 +603,8 @@ button {
 			
 			// 아이디 중복확인 체크
 			document.getElementById("checkDuplicate").addEventListener('click',checkAndPop);
-
+			
+			// 중복아이디 받아와 및 사용가능여부 띄워주는 함수
 			function checkAndPop() {
 
 				let user_id = document.getElementById("temporaryId").value;
@@ -603,13 +619,15 @@ button {
 							success : function(info) {
 
 								console.log('info', info.user_id)
+								// 중복 아이디가 있을때
 								if (info.user_id != undefined) {
 
 									console.log(info);
 									document.getElementById("id_result").innerText = "이미 사용 중인 아이디입니다.";
 									// let isIdOk = false;
 									document.getElementById("joinButton").disabled = true;
-
+								
+								// 중복 아이디가 없을 떄
 								} else {
 
 									document.getElementById("id_result").innerText = "사용 가능한 아이디 입니다.";
@@ -683,10 +701,10 @@ button {
 
 
 								<!-- Checkout Section End -->
-
+<!-- --------------------------------회원가입 끝 --------------------------------------------------->
 
 								<!-- Related Product Section End -->
-								<!-- 마지막 하단 반복되는 부분 -->
+<!----------------------------- 마지막 하단 반복되는 부분 --------------------------------------------->
 								
 								<!-- Footer Section Begin -->
     <footer class="footer spad">
@@ -787,7 +805,7 @@ button {
         
     </footer>
     <!-- Footer Section End -->
-
+<!----------------------------- 마지막 하단 반복되는 부분 끝 --------------------------------------------->
 							<!-- Js Plugins -->
 							<script src="/controller/resources/js/jquery-3.3.1.min.js"></script>
 							<script src="/controller/resources/js/bootstrap.min.js"></script>

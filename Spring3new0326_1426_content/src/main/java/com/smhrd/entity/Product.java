@@ -49,5 +49,7 @@ public class Product {
     // 상품 상태 
     private String prod_status;
 	
-	
+	// 학교 명
+    private String prod_sc_nm;
+    
 }

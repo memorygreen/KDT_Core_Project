@@ -476,7 +476,7 @@
 							<form action="ProductForm.do">
 								<button type="submit" class="btn"
 									style="background-color: #44bd32; color: white; font-weight: bold;">상품등록
-									버튼(임시)</button>
+									버튼</button>
 							</form>
 						</c:if>
 
@@ -515,7 +515,7 @@
 							<!-- 원래경로 -->
 							<!-- <div class="featured__item__pic set-bg" data-setbg="resources/img/featured/feature-1.jpg"> -->
 							<div class="featured__item__pic set-bg"
-								data-setbg="resources/img/saveimg/${my_prod.prod_img_path}">
+								data-setbg="resources/img/${my_prod.prod_img_path}">
 
 								<!-- 찜하기, 리트윗, 쇼핑카드  -->
 								<ul class="featured__item__pic__hover">
@@ -539,12 +539,12 @@
 									<a href="ProductContent.do?prod_idx=${my_prod.prod_idx}">${my_prod.prod_name}</a>
 								</h6>
 								<h5>${my_prod.prod_price}원</h5>
-								<span style="font-size: 15px;">학교명</span>
+								<span style="font-size: 15px;">${my_prod.prod_sc_nm}</span>
 								<!-- session에 있는 값 가져와야하나? -->
 								</br> <span style="font-size: 13px;">${fn:split(my_prod.created_at, " ")[0]}</span>
 								<!-- 상품 게시 일자 -->
 								</br> <span style="font-size: 13px;">조회수 ${my_prod.prod_views}</span> </br>
-								</br> <span style="font-size: 13px;">작성자id(임시) ${my_prod.seller_id}</span> </br>
+								</br> <span style="font-size: 13px;">${my_prod.seller_id}</span> </br>
 
 
 

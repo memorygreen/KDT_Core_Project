@@ -491,7 +491,7 @@
 							<form action="ProductForm.do">
 								<button type="submit" class="btn"
 									style="background-color: #44bd32; color: white; font-weight: bold;">상품등록
-									버튼(임시)</button>
+									버튼</button>
 							</form>
 						</c:if>
 
@@ -606,7 +606,7 @@
 									<a href="ProductContent.do?prod_idx=${prod.prod_idx}">${prod.prod_name}</a>
 								</h6>
 								<h5>${prod.prod_price}원</h5>
-								<span style="font-size: 15px;">학교명</span>
+								<span style="font-size: 15px;">${prod.prod_sc_nm}</span>
 								<!-- session에 있는 값 가져와야하나? -->
 								</br> <span style="font-size: 13px;">${fn:split(prod.created_at, " ")[0]}</span>
 								<!-- 상품 게시 일자 -->

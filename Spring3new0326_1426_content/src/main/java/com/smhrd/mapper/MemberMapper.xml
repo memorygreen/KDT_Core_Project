@@ -2,18 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smhrd.mapper.MemberMapper">
 
+<!--  회원가입 정보 insert -->
 <insert id="join" parameterType="com.smhrd.entity.Member">
 	INSERT INTO tb_user(user_id, user_pw, user_phone, user_nm, user_birthdate) VALUES(#{user_id}, #{user_pw}, #{user_phone}, #{user_nm}, #{user_birthdate})
 </insert>
 
+<!-- 중복된 아이디 찾아 가져오기 -->
 <select id="findDuplicate" parameterType="String" resultType="com.smhrd.entity.Member">
 	SELECT * FROM tb_user WHERE user_id=#{user_id}
 </select>
 
+<!-- 로그인 아이디 비밀번호 찾아 가져오기-->
 <select id="login" parameterType="com.smhrd.entity.Member" resultType="com.smhrd.entity.Member">
-	SELECT * FROM tb_user WHERE user_id=#{user_id} AND user_pw=#{user_pw}
+	SELECT * FROM tb_user WHERE user_id=#{user_id} AND user_pw=#{user_pw} AND user_status != '탈퇴';
  </select>
  
+ <!-- 학교정보, 학생증 정보 업데이트 -->
  <update id="UpdateSchoolInfo" parameterType="com.smhrd.entity.Member">
  	UPDATE tb_user SET user_sc_nm=#{user_sc_nm}, user_sc_img=#{user_sc_img} WHERE user_id=#{user_id}
  	 </update>

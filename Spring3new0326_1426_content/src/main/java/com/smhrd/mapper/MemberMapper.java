@@ -9,13 +9,17 @@ import com.smhrd.entity.Member;
 
 @Mapper
 public interface MemberMapper {
-
+	
+	// 회원가입 기능
 	public void join(Member vo);
-
+	
+	//아이디 중복 체크 기능
 	public Member findDuplicate(String user_id);
 
+	// 회원 로그인 기능
 	public Member login(Member vo);
 
+	// 학교정보, 학생증 업로드 기능
 	public void UpdateSchoolInfo(Member vo);
 
 	public List<Member> UserInformation();
