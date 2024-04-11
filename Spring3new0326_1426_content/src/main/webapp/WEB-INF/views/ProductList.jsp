@@ -394,12 +394,12 @@
 
 	<!-- 방금올라온 상품 목록(움직이는 부분) 시작 -->
 	<!-- Hero Section Begin -->
-	<<section class="hero">
+	<section class="hero">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">
-                    
-                </div>
+                   </div> 
+                
                 <div class="col-lg-9">
                     <div class="hero__search">
                         <div class="hero__search__form">
@@ -436,40 +436,31 @@
 		<div class="container">
 			<div class="row">
 				<div class="categories__slider owl-carousel">
-
-					<!-- 여기 -->
-
-					<c:forEach items="${prod_list}" var="prod" varStatus="i" begin="0"
-						end="4">
-						<div class="col-lg-3">
-						
-						
-						<!-- 조건  -->
-						<!--  절대 경로 조건 주는 부분  --> <!-- 조건문 안 div태그 안 닫아줘도 되는건지..?일단 잘 됨 -->
-								<c:choose>
-									<c:when test="${empty prod.prod_abs_img_path }">
-										<div class="categories__item set-bg"
-											data-setbg="resources/img/${prod.prod_img_path}">
-											
-									</c:when>
-									<c:otherwise>
-									<div class="categories__item set-bg"
-											data-setbg="${prod.prod_abs_img_path}">
-									</c:otherwise>
-								</c:choose>
-						<!-- 조건 끝 -->
-						
-							
+						<!-- 여기 -->
+						<c:forEach items="${prod_list}" var="prod" varStatus="i" begin="0"
+							end="4">
+							<div class="col-lg-3">
+							<!-- 조건  -->
+							<!--  절대 경로 조건 주는 부분  --> <!-- 조건문 안 div태그 안 닫아줘도 되는건지..?일단 잘 됨 -->
+									<c:choose>
+										<c:when test="${empty prod.prod_abs_img_path }">
+											<div class="categories__item set-bg"
+												data-setbg="resources/img/${prod.prod_img_path}">
+										</c:when>
+										<c:otherwise>
+											<div class="categories__item set-bg"
+													data-setbg="${prod.prod_abs_img_path}">
+										</c:otherwise>
+									</c:choose>
+							<!-- 조건 끝 -->
 								<h5>
 									<a href="ProductContent.do?prod_idx=${prod.prod_idx}">${prod.prod_name}</a>
 								</h5>
-							</div>
-						</div>
-					</c:forEach>
-					
-
-				</div>
-			</div>
+							</div> <!--  class="col-lg-3" 끝나는 곳 -->
+					</div> <!--categories__slider owl-carousel 끝나는 곳 -->
+						</c:forEach>
+				</div> <!--  class="row" 끝나는 곳 -->
+			</div><!--  class="container">끝나는 곳 -->
 		</div>
 	</section>
 	<!-- Categories Section End -->

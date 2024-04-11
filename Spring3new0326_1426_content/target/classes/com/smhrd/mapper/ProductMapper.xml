@@ -2,28 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smhrd.mapper.ProductMapper">
 	
-	<!-- 상품 목록 조회(최신순)--> 
+	<!-- 자영 : 상품 목록 조회(최신순)--> 
 	<select id="ProductList" resultType="com.smhrd.entity.Product">
 		SELECT * FROM tb_product
 		ORDER BY created_at DESC;
 	</select>	
 	
 	
-	<!-- 상품 목록 조회(조회수많은순)--> 
+	<!-- 자영 : 상품 목록 조회(조회수많은순)--> 
 	<select id="ProductViewsList" resultType="com.smhrd.entity.Product">
 		SELECT * FROM tb_product 
 		ORDER BY prod_views DESC;
 	</select>	
 	
 	
-	<!-- 상품 목록 조회(낮은 가격순) (오름차순)--> 
+	<!-- 자영 : 상품 목록 조회(낮은 가격순) (오름차순)--> 
 	<select id="ProductLowestPriceList" resultType="com.smhrd.entity.Product">
 		SELECT * FROM tb_product 
 		ORDER BY prod_price;
 	</select>	
 	
 	
-	<!-- 상품 목록 조회(댓글개수 많은순) (내림차순) -->
+	<!--  자영 : 상품 목록 조회(댓글개수 많은순) (내림차순) -->
 	<select id="ProductReplyList" resultType="com.smhrd.entity.Product">
 	SELECT p.*, COUNT(r.reply_idx) AS reply_count
         FROM tb_product p
@@ -32,27 +32,28 @@
         ORDER BY reply_count DESC, prod_name ASC;
 	</select>
 	
-	<!-- 상품 등록 -->
+	<!--  자영 : 상품 등록 -->
 	<insert id="ProductInsert" parameterType="com.smhrd.entity.Product"><!-- 판매완료날짜 뺌 -->
 		INSERT INTO tb_product (prod_name, prod_desc, prod_price, seller_id,  prod_img_path, prod_sc_nm) 
 		VALUES ( #{prod_name} , #{prod_desc}, #{prod_price}, #{seller_id}, #{prod_img_path}, #{prod_sc_nm})
 	</insert>
 	
 	
-	<!-- 상품 상세보기 -->
+	<!--  자영 : 상품 상세보기 -->
 	<select id="ProductContent" parameterType="int" resultType="com.smhrd.entity.Product">
 		SELECT * FROM tb_product WHERE prod_idx = #{prod_idx}
 	</select>
 	
-	<!-- 상품 조회수 올리기 -->
+	<!--  자영 : 상품 조회수 올리기 -->
 	<update id="ProductCount" parameterType="int">
 		UPDATE tb_product SET prod_views = prod_views+1 WHERE prod_idx = #{prod_idx}	
 	</update>
 	
 	
-	<!-- (로그인한 회원의 상품일 경우) 상품 거래상태 변경(거래완료로 변경!) -->
+	<!--  자영 : (로그인한 회원의 상품일 경우) 상품 거래상태 변경(거래완료로 변경!) -->
 	<update id="productStatusChange" parameterType="int">
-		UPDATE tb_product SET prod_status = '거래완료' WHERE prod_idx = #{prod_idx}	
+		UPDATE tb_product SET prod_status = '거래완료', prod_sold_dt = now() WHERE prod_idx = #{prod_idx}
+		
 	</update>
 	
 	

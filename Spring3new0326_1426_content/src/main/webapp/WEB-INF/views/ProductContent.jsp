@@ -426,15 +426,11 @@
 						<!-- 상품 사진 -->
 						<div class="product__details__pic__item">
 
-							<img class="product__details__pic__item--large"
+						<!-- <img class="product__details__pic__item--large"
 								src="resources/img/saveimg/${prod.prod_img_path}" alt="">
+							 -->	
 								
 								
-								
-								
-						</div>
-						
-						
 						
 						
 						<!-- 조건  -->
@@ -452,9 +448,10 @@
 											
 									</c:otherwise>
 								</c:choose>
+					
 						<!-- 조건 끝 -->
 						
-						
+						</div>
 						
 						
 						
@@ -479,7 +476,7 @@
 				<div class="col-lg-6 col-md-6">
 					<div class="product__details__text">
 						<h3>${prod.prod_name}</h3>
-						<!-- 상품명(상품 제목) -->
+						<!--자영 :  상품명(상품 제목) -->
 						<h5 style="font-weight: bold;
 						          display: inline-block;
 						          padding: 5px 10px;
@@ -492,15 +489,13 @@
 						</h5>
 						<h6>판매자id : ${prod.seller_id}</h6>
 						<!-- 임시 확인용 -->
-						<h6>작성자 닉네임 : </h6>
-						<!-- 작성자 닉네임(user에서 가져와야함) -->
 
 						<!-- <h5>판매상태 : ${prod.prod_status}</h5> -->
 						
 						
 						
 						
-						<!-- 로그인한 회원이 판매자와 일치할 경우 '거래완료'버튼 활성화 -->
+						<!-- 자영 : 로그인한 회원이 판매자와 일치할 경우 '거래완료'버튼 활성화 -->
 						<c:choose>
 							<c:when test="${prod.seller_id==info.user_id}">
 								<form action="productStatusChange.do">
@@ -545,9 +540,14 @@
 						<ul>
 							<li><b>상품등록시간</b> <span>${prod.created_at}</span></li>
 							<!-- 현재시간과 등록시간 비교해서 몇초전으로 표기 가능 -->
+							<c:if test="${not empty prod.prod_sold_dt}">
+								<li><b>판매완료시간</b> <span>${prod.prod_sold_dt}</span></li>
+							</c:if>
 							<li><b>조회수</b> <span>${prod.prod_views}</span></li>
 							<li><b>신고수</b> <span>${prod.prod_rpt_cnt}</span></li>
-
+	
+	
+	
 							<!-- 공유 하는 내용 
                             <li><b>Share on</b>
                                 <div class="share">
@@ -692,9 +692,10 @@
 									<tr><td colspan="3"></td></tr>
 									<tr >
 										<td colspan="3" align="center">
-										<a href="ProductUpdateForm.do?idx=${prod.prod_idx}" class="btn btn-info">수정화면</a> 
-										<a href="ProductDelete.do?idx=${prod.prod_idx}" class="btn btn-danger">삭제</a> 
-										<a href="ProductList.do" class="btn btn-warning">상품 목록</a>
+										<a href="ProductUpdateForm.do?idx=${prod.prod_idx}" class="btn" style="background-color: #d0d6cf; color: #333;">수정화면</a> 
+										<a href="ProductDelete.do?idx=${prod.prod_idx}" class="btn" style="background-color: #FF3F34; color: white">삭제</a>
+										<a href="ProductList.do" class="btn" style="background-color: #44bd32; color: white">상품 목록</a>
+										
 										</td>
 									</tr>
 								</table>

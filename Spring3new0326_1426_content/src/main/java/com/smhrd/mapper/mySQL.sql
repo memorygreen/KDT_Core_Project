@@ -33,12 +33,15 @@ PRIMARY KEY (prod_idx)
 DROP TABLE tb_product;
 
 
-
+ALTER TABLE tb_product
+ADD CONSTRAINT fk_seller_id_user_id
+FOREIGN KEY (seller_id) REFERENCES tb_user(user_id);
 
 
 INSERT INTO tb_product (prod_name, prod_desc, prod_price, seller_id, prod_img_path, prod_abs_img_path) 
 		VALUES ('상품명' ,'제품설명', 9999, 'testid', 'test', '외부경로')
 
+DELETE FROM tb_product WHERE prod_idx=53;
 
 SELECT * FROM tb_product; 
 SELECT * FROM tb_user; 
